@@ -1,4 +1,4 @@
 BaseballProspects
 =================
 
-Tool for added Prospect List information into the database.
+Tool for adding Prospect List information into the database.
