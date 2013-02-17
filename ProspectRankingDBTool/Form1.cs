@@ -12,9 +12,20 @@ namespace ProspectRankingDBTool
 {
     public partial class Form1 : Form
     {
+        List<string> testList = new List<string>();
+
         public Form1()
         {
             InitializeComponent();
+            prospectdbEntities context = new prospectdbEntities();
+            var query = from it in context.Organizations
+                        orderby it.Abbr
+                        select it;
+
+            foreach (Organization org in query)
+                testList.Add(org.Abbr);
+
+            listBox1.DataSource = testList;
         }
     }
 }
