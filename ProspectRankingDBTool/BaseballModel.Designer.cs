@@ -596,10 +596,12 @@ namespace ProspectRankingDBTool
         /// Create a new Player object.
         /// </summary>
         /// <param name="playerID">Initial value of the PlayerID property.</param>
-        public static Player CreatePlayer(global::System.Int64 playerID)
+        /// <param name="public">Initial value of the Public property.</param>
+        public static Player CreatePlayer(global::System.Int64 playerID, global::System.String @public)
         {
             Player player = new Player();
             player.PlayerID = playerID;
+            player.Public = @public;
             return player;
         }
 
@@ -920,6 +922,30 @@ namespace ProspectRankingDBTool
         private Nullable<global::System.Int16> _GraduationYear;
         partial void OnGraduationYearChanging(Nullable<global::System.Int16> value);
         partial void OnGraduationYearChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Public
+        {
+            get
+            {
+                return _Public;
+            }
+            set
+            {
+                OnPublicChanging(value);
+                ReportPropertyChanging("Public");
+                _Public = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Public");
+                OnPublicChanged();
+            }
+        }
+        private global::System.String _Public;
+        partial void OnPublicChanging(global::System.String value);
+        partial void OnPublicChanged();
 
         #endregion
     
@@ -1006,7 +1032,8 @@ namespace ProspectRankingDBTool
         /// <param name="year">Initial value of the Year property.</param>
         /// <param name="season">Initial value of the Season property.</param>
         /// <param name="number">Initial value of the Number property.</param>
-        public static PlayerList CreatePlayerList(global::System.Int64 playerListID, global::System.Int64 uRLID, global::System.Int16 year, global::System.String season, global::System.Byte number)
+        /// <param name="public">Initial value of the Public property.</param>
+        public static PlayerList CreatePlayerList(global::System.Int64 playerListID, global::System.Int64 uRLID, global::System.Int16 year, global::System.String season, global::System.Byte number, global::System.String @public)
         {
             PlayerList playerList = new PlayerList();
             playerList.PlayerListID = playerListID;
@@ -1014,6 +1041,7 @@ namespace ProspectRankingDBTool
             playerList.Year = year;
             playerList.Season = season;
             playerList.Number = number;
+            playerList.Public = @public;
             return playerList;
         }
 
@@ -1190,6 +1218,30 @@ namespace ProspectRankingDBTool
         private global::System.Byte _Number;
         partial void OnNumberChanging(global::System.Byte value);
         partial void OnNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Public
+        {
+            get
+            {
+                return _Public;
+            }
+            set
+            {
+                OnPublicChanging(value);
+                ReportPropertyChanging("Public");
+                _Public = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Public");
+                OnPublicChanged();
+            }
+        }
+        private global::System.String _Public;
+        partial void OnPublicChanging(global::System.String value);
+        partial void OnPublicChanged();
 
         #endregion
     
@@ -1290,12 +1342,14 @@ namespace ProspectRankingDBTool
         /// <param name="playerID">Initial value of the PlayerID property.</param>
         /// <param name="organizationID">Initial value of the OrganizationID property.</param>
         /// <param name="urlID">Initial value of the UrlID property.</param>
-        public static PlayerRanking CreatePlayerRanking(global::System.Int64 playerID, global::System.String organizationID, global::System.Int64 urlID)
+        /// <param name="public">Initial value of the Public property.</param>
+        public static PlayerRanking CreatePlayerRanking(global::System.Int64 playerID, global::System.String organizationID, global::System.Int64 urlID, global::System.String @public)
         {
             PlayerRanking playerRanking = new PlayerRanking();
             playerRanking.PlayerID = playerID;
             playerRanking.OrganizationID = organizationID;
             playerRanking.UrlID = urlID;
+            playerRanking.Public = @public;
             return playerRanking;
         }
 
@@ -1430,6 +1484,30 @@ namespace ProspectRankingDBTool
         private global::System.String _Grade;
         partial void OnGradeChanging(global::System.String value);
         partial void OnGradeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Public
+        {
+            get
+            {
+                return _Public;
+            }
+            set
+            {
+                OnPublicChanging(value);
+                ReportPropertyChanging("Public");
+                _Public = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Public");
+                OnPublicChanged();
+            }
+        }
+        private global::System.String _Public;
+        partial void OnPublicChanging(global::System.String value);
+        partial void OnPublicChanged();
 
         #endregion
     

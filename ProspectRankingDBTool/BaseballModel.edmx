@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="prospectdbModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="prospectdbModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="prospectdbModelStoreContainer">
           <EntitySet Name="Author" EntityType="prospectdbModel.Store.Author" store:Type="Tables" Schema="prospectdb" />
           <EntitySet Name="Organization" EntityType="prospectdbModel.Store.Organization" store:Type="Tables" Schema="prospectdb" />
@@ -79,6 +79,7 @@
           <Property Name="Fangraphs" Type="text" />
           <Property Name="BasebaRef" Type="text" />
           <Property Name="GraduationYear" Type="year" />
+          <Property Name="Public" Type="enum" Nullable="false" />
         </EntityType>
         <EntityType Name="PlayerList">
           <Key>
@@ -91,6 +92,7 @@
           <Property Name="Year" Type="year" Nullable="false" />
           <Property Name="Season" Type="enum" Nullable="false" />
           <Property Name="Number" Type="utinyint" Nullable="false" />
+          <Property Name="Public" Type="enum" Nullable="false" />
         </EntityType>
         <EntityType Name="PlayerRanking">
           <Key>
@@ -103,6 +105,7 @@
           <Property Name="UrlID" Type="uint" Nullable="false" />
           <Property Name="Rank" Type="tinyint" />
           <Property Name="Grade" Type="enum" />
+          <Property Name="Public" Type="enum" Nullable="false" />
         </EntityType>
         <EntityType Name="Teams">
           <Key>
@@ -120,13 +123,13 @@
             <PropertyRef Name="UrlID" />
           </Key>
           <Property Name="UrlID" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Author" Type="uint" Nullable="false" />
+          <Property Name="Author" Type="uint" />
           <Property Name="Date" Type="date" />
           <Property Name="Type" Type="enum" />
           <Property Name="URL" Type="text" Nullable="false" />
         </EntityType>
         <Association Name="FK__Author">
-          <End Role="Author" Type="prospectdbModel.Store.Author" Multiplicity="1" />
+          <End Role="Author" Type="prospectdbModel.Store.Author" Multiplicity="0..1" />
           <End Role="URL" Type="prospectdbModel.Store.URL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Author">
@@ -221,8 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="prospectdbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -307,6 +309,7 @@
           <Property Name="GraduationYear" Type="Int16" />
           <NavigationProperty Name="Organization1" Relationship="prospectdbModel.FK_Player_Organization" FromRole="Player" ToRole="Organization" />
           <NavigationProperty Name="PlayerRankings" Relationship="prospectdbModel.FK__Player" FromRole="Player" ToRole="PlayerRanking" />
+          <Property Type="String" Name="Public" Nullable="false" />
         </EntityType>
         <EntityType Name="PlayerList">
           <Key>
@@ -321,6 +324,7 @@
           <Property Name="Number" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Organization1" Relationship="prospectdbModel.FK_PlayerList_Organization" FromRole="PlayerList" ToRole="Organization" />
           <NavigationProperty Name="URL" Relationship="prospectdbModel.FK_PlayerList_URL" FromRole="PlayerList" ToRole="URL" />
+          <Property Type="String" Name="Public" Nullable="false" />
         </EntityType>
         <EntityType Name="PlayerRanking">
           <Key>
@@ -336,6 +340,7 @@
           <NavigationProperty Name="Organization" Relationship="prospectdbModel.FK__Teams" FromRole="PlayerRanking" ToRole="Organization" />
           <NavigationProperty Name="Player" Relationship="prospectdbModel.FK__Player" FromRole="PlayerRanking" ToRole="Player" />
           <NavigationProperty Name="URL" Relationship="prospectdbModel.FK__URL" FromRole="PlayerRanking" ToRole="URL" />
+          <Property Type="String" Name="Public" Nullable="false" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -475,7 +480,8 @@
             <ScalarProperty Name="Abbr" ColumnName="Abbr" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Players"><EntityTypeMapping TypeName="prospectdbModel.Player"><MappingFragment StoreEntitySet="Player">
-            <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
+            <ScalarProperty Name="Public" ColumnName="Public" />
+                <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
             <ScalarProperty Name="Firstname" ColumnName="Firstname" />
             <ScalarProperty Name="Lastname" ColumnName="Lastname" />
             <ScalarProperty Name="DOB" ColumnName="DOB" />
@@ -490,7 +496,8 @@
             <ScalarProperty Name="GraduationYear" ColumnName="GraduationYear" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PlayerLists"><EntityTypeMapping TypeName="prospectdbModel.PlayerList"><MappingFragment StoreEntitySet="PlayerList">
-            <ScalarProperty Name="PlayerListID" ColumnName="PlayerListID" />
+            <ScalarProperty Name="Public" ColumnName="Public" />
+                <ScalarProperty Name="PlayerListID" ColumnName="PlayerListID" />
             <ScalarProperty Name="URLID" ColumnName="URLID" />
             <ScalarProperty Name="Organization" ColumnName="Organization" />
             <ScalarProperty Name="Position" ColumnName="Position" />
@@ -499,7 +506,8 @@
             <ScalarProperty Name="Number" ColumnName="Number" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PlayerRankings"><EntityTypeMapping TypeName="prospectdbModel.PlayerRanking"><MappingFragment StoreEntitySet="PlayerRanking">
-            <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
+            <ScalarProperty Name="Public" ColumnName="Public" />
+                <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
             <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
             <ScalarProperty Name="UrlID" ColumnName="UrlID" />
             <ScalarProperty Name="Rank" ColumnName="Rank" />

@@ -1,6 +1,6 @@
 ﻿namespace ProspectRankingDBTool
 {
-    partial class Form1
+    partial class ProspectDataEntryTool
     {
         /// <summary>
         /// Required designer variable.

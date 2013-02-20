@@ -10,11 +10,11 @@ using MySql.Data.MySqlClient;
 
 namespace ProspectRankingDBTool
 {
-    public partial class Form1 : Form
+    public partial class ProspectDataEntryTool : Form
     {
         List<string> testList = new List<string>();
 
-        public Form1()
+        public ProspectDataEntryTool()
         {
             InitializeComponent();
             prospectdbEntities context = new prospectdbEntities();
