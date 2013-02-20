@@ -6,20 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace ProspectRankingDBTool
 {
-    public partial class ProspectDataEntryTool : Form
+    public partial class NewPlayerList : Form
     {
-        public ProspectDataEntryTool()
+        public NewPlayerList()
         {
             InitializeComponent();
-        }
-
-        private void btnNewPlayerList_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

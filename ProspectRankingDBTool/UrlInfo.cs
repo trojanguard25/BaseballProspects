@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace ProspectRankingDBTool
 {
-    public partial class ProspectDataEntryTool : Form
+    public partial class UrlInfo : UserControl
     {
-        public ProspectDataEntryTool()
+        public UrlInfo()
         {
             InitializeComponent();
-        }
-
-        private void btnNewPlayerList_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

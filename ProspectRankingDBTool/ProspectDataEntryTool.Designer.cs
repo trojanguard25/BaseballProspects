@@ -28,32 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnViewData = new System.Windows.Forms.Button();
+            this.btnNewPlayerList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listBox1
+            // btnViewData
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(13, 13);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(259, 238);
-            this.listBox1.TabIndex = 0;
+            this.btnViewData.Location = new System.Drawing.Point(13, 61);
+            this.btnViewData.Name = "btnViewData";
+            this.btnViewData.Size = new System.Drawing.Size(75, 23);
+            this.btnViewData.TabIndex = 0;
+            this.btnViewData.Text = "View Data";
+            this.btnViewData.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // btnNewPlayerList
+            // 
+            this.btnNewPlayerList.Location = new System.Drawing.Point(298, 61);
+            this.btnNewPlayerList.Name = "btnNewPlayerList";
+            this.btnNewPlayerList.Size = new System.Drawing.Size(75, 23);
+            this.btnNewPlayerList.TabIndex = 1;
+            this.btnNewPlayerList.Text = "New Player List";
+            this.btnNewPlayerList.UseVisualStyleBackColor = true;
+            this.btnNewPlayerList.Click += new System.EventHandler(this.btnNewPlayerList_Click);
+            // 
+            // ProspectDataEntryTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.listBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(385, 96);
+            this.Controls.Add(this.btnNewPlayerList);
+            this.Controls.Add(this.btnViewData);
+            this.Name = "ProspectDataEntryTool";
+            this.Text = "Prospect Data Entry Tool";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btnViewData;
+        private System.Windows.Forms.Button btnNewPlayerList;
+
 
     }
 }
