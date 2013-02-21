@@ -36,10 +36,11 @@
             this.cbPlayerName = new System.Windows.Forms.ComboBox();
             this.btnAddPlayer = new System.Windows.Forms.Button();
             this.cbOrganization = new System.Windows.Forms.ComboBox();
-            this.txtRank = new System.Windows.Forms.TextBox();
             this.cbGrade = new System.Windows.Forms.ComboBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.numRank = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numRank)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -117,14 +118,6 @@
             this.cbOrganization.Size = new System.Drawing.Size(66, 21);
             this.cbOrganization.TabIndex = 7;
             // 
-            // txtRank
-            // 
-            this.txtRank.Location = new System.Drawing.Point(104, 76);
-            this.txtRank.Name = "txtRank";
-            this.txtRank.ReadOnly = true;
-            this.txtRank.Size = new System.Drawing.Size(67, 20);
-            this.txtRank.TabIndex = 8;
-            // 
             // cbGrade
             // 
             this.cbGrade.FormattingEnabled = true;
@@ -150,24 +143,37 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
-            // PlayerRanking
+            // numRank
+            // 
+            this.numRank.Location = new System.Drawing.Point(104, 77);
+            this.numRank.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numRank.Name = "numRank";
+            this.numRank.Size = new System.Drawing.Size(42, 20);
+            this.numRank.TabIndex = 12;
+            // 
+            // PlayerRank
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.numRank);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.cbOrganization);
             this.Controls.Add(this.cbGrade);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtRank);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAddPlayer);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cbPlayerName);
             this.Controls.Add(this.label5);
-            this.Name = "PlayerRanking";
+            this.Name = "PlayerRank";
             this.Size = new System.Drawing.Size(338, 173);
+            ((System.ComponentModel.ISupportInitialize)(this.numRank)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,10 +189,10 @@
         private System.Windows.Forms.ComboBox cbPlayerName;
         private System.Windows.Forms.Button btnAddPlayer;
         private System.Windows.Forms.ComboBox cbOrganization;
-        private System.Windows.Forms.TextBox txtRank;
         private System.Windows.Forms.ComboBox cbGrade;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.NumericUpDown numRank;
 
     }
 }
