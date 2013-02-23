@@ -21,5 +21,13 @@ namespace ProspectRankingDBTool
         {
 
         }
+
+        private void btnViewData_Click(object sender, EventArgs e)
+        {
+            NewPlayer form = new NewPlayer();
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+            }
+        }
     }
 }

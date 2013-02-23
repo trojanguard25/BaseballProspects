@@ -11,11 +11,14 @@ namespace ProspectRankingDBTool
 {
     public partial class PlayerData : UserControl
     {
-        Player m_player;
-        List<string> m_positionEnum;
-        List<string> m_throwEnum;
-        List<string> m_batEnum;
-        List<string> m_publicEnum;
+        private Player m_player;
+
+        private BaseballModelContext m_context;
+
+        private List<string> m_positionEnum;
+        private List<string> m_throwEnum;
+        private List<string> m_batEnum;
+        private List<string> m_organizationEnum;
 
         public PlayerData()
         {
@@ -31,33 +34,12 @@ namespace ProspectRankingDBTool
             m_player = player;
         }
 
-        private void InitializeEnums()
+        public Player PlayerEntity
         {
-            m_positionEnum = new List<string>();
-            m_positionEnum.Add("SP");
-            m_positionEnum.Add("RP");
-            m_positionEnum.Add("C");
-            m_positionEnum.Add("1B");
-            m_positionEnum.Add("2B");
-            m_positionEnum.Add("3B");
-            m_positionEnum.Add("SS");
-            m_positionEnum.Add("IF");
-            m_positionEnum.Add("CF");
-            m_positionEnum.Add("OF");
-            m_positionEnum.Add("DH");
-
-            m_batEnum = new List<string>();
-            m_batEnum.Add("R");
-            m_batEnum.Add("L");
-            m_batEnum.Add("S");
-
-            m_throwEnum = new List<string>();
-            m_throwEnum.Add("R");
-            m_throwEnum.Add("L");
-
-            m_publicEnum = new List<string>();
-            m_publicEnum.Add("Y");
-            m_publicEnum.Add("N");
+            get
+            {
+                return m_player;
+            }
         }
 
         private void InitializePlayerData()
@@ -80,11 +62,166 @@ namespace ProspectRankingDBTool
                 numWeight.Value = (decimal)m_player.Weight;
             }
 
+            m_positionEnum = new List<string>(m_context.Positions);
+            m_positionEnum.Insert(0, "");
+            m_throwEnum = new List<string>(m_context.Throwing);
+            m_throwEnum.Insert(0, "");
+            m_batEnum = new List<string>(m_context.Batting);
+            m_batEnum.Insert(0, "");
+            m_organizationEnum = new List<string>(m_context.Organizations);
+            m_organizationEnum.Insert(0, "");
+
             cbBat.DataSource = m_batEnum;
             cbPosition.DataSource = m_positionEnum;
             cbThrow.DataSource = m_throwEnum;
-            
+            cbOrganization.DataSource = m_organizationEnum;
 
+            SetCBIndex(m_player.Bat, m_batEnum, cbBat);
+            SetCBIndex(m_player.Position, m_positionEnum, cbPosition);
+            SetCBIndex(m_player.Throw, m_throwEnum, cbThrow);
+            SetCBIndex(m_player.Organization, m_organizationEnum, cbOrganization);
+
+            checkPublic.Checked = m_player.Public.Equals("Y", StringComparison.OrdinalIgnoreCase);
+
+            if (m_player.GraduationYear != null)
+            {
+                numGradYear.Value = (decimal)m_player.GraduationYear;
+            }
+
+            txtBRUrl.Text = m_player.BasebaRef;
+            txtFGUrl.Text = m_player.Fangraphs;
+        }
+
+        private void SetCBIndex(string currentValue, List<string> dataList, ComboBox cb)
+        {
+            if (currentValue.Length > 0)
+            {
+                int posID = dataList.FindIndex(s => s == currentValue);
+                if (posID < 0)
+                {
+                    dataList.Add(currentValue);
+                    cb.SelectedIndex = dataList.Count - 1;
+                }
+                else
+                {
+                    cb.SelectedIndex = posID;
+                }
+            }
+            else
+            {
+                cb.SelectedIndex = 0;
+            }
+        }
+
+        private void PlayerData_Load(object sender, EventArgs e)
+        {
+            if (DesignMode)
+                return;
+
+            m_context = BaseballModelContext.Instance;
+
+            InitializePlayerData();
+
+        }
+
+        private void cbOrganization_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_player.Organization = cbOrganization.SelectedValue.ToString();
+        }
+
+        private void cbPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_player.Position = cbPosition.SelectedValue.ToString();
+        }
+
+        private void cbThrow_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_player.Throw = cbThrow.SelectedValue.ToString();
+        }
+
+        private void cbBat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_player.Bat = cbBat.SelectedValue.ToString();
+        }
+
+        private void numGradYear_ValueChanged(object sender, EventArgs e)
+        {
+            if (numGradYear.Value < 1990)
+            {
+                m_player.GraduationYear = null;
+            }
+            else
+            {
+                m_player.GraduationYear = (short?)numGradYear.Value;
+            }
+        }
+
+        private void txtFirstName_TextChanged(object sender, EventArgs e)
+        {
+            m_player.Firstname = txtFirstName.Text;
+        }
+
+        private void txtLastName_TextChanged(object sender, EventArgs e)
+        {
+            m_player.Lastname = txtLastName.Text;
+        }
+
+        private void dateDOB_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateDOB.Value.Year > 1970)
+            {
+                m_player.DOB = dateDOB.Value;
+            }
+            else
+            {
+                m_player.DOB = null;
+            }
+        }
+
+        private void numHeight_ValueChanged(object sender, EventArgs e)
+        {
+            if (numHeight.Value < 50)
+            {
+                m_player.Height = null;
+            }
+            else
+            {
+                m_player.Height = (byte?)numHeight.Value;
+            }
+        }
+
+        private void numWeight_ValueChanged(object sender, EventArgs e)
+        {
+            if (numWeight.Value < 100)
+            {
+                m_player.Weight = null;
+            }
+            else
+            {
+                m_player.Weight = (int?)numWeight.Value;
+            }
+        }
+
+        private void txtBRUrl_TextChanged(object sender, EventArgs e)
+        {
+            m_player.BasebaRef = txtBRUrl.Text;
+        }
+
+        private void txtFGUrl_TextChanged(object sender, EventArgs e)
+        {
+            m_player.Fangraphs = txtFGUrl.Text;
+        }
+
+        private void checkPublic_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkPublic.Checked)
+            {
+                m_player.Public = "Y";
+            }
+            else
+            {
+                m_player.Public = "N";
+            }
         }
     }
 }

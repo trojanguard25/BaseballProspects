@@ -40,12 +40,13 @@
             this.btnViewData.TabIndex = 0;
             this.btnViewData.Text = "View Data";
             this.btnViewData.UseVisualStyleBackColor = true;
+            this.btnViewData.Click += new System.EventHandler(this.btnViewData_Click);
             // 
             // btnNewPlayerList
             // 
-            this.btnNewPlayerList.Location = new System.Drawing.Point(298, 61);
+            this.btnNewPlayerList.Location = new System.Drawing.Point(279, 61);
             this.btnNewPlayerList.Name = "btnNewPlayerList";
-            this.btnNewPlayerList.Size = new System.Drawing.Size(75, 23);
+            this.btnNewPlayerList.Size = new System.Drawing.Size(94, 23);
             this.btnNewPlayerList.TabIndex = 1;
             this.btnNewPlayerList.Text = "New Player List";
             this.btnNewPlayerList.UseVisualStyleBackColor = true;

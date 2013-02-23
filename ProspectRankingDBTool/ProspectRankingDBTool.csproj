@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseballModelContext.cs" />
     <Compile Include="NewPlayer.cs">
       <SubType>Form</SubType>
     </Compile>

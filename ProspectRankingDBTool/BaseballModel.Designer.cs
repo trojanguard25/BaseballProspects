@@ -596,12 +596,10 @@ namespace ProspectRankingDBTool
         /// Create a new Player object.
         /// </summary>
         /// <param name="playerID">Initial value of the PlayerID property.</param>
-        /// <param name="public">Initial value of the Public property.</param>
-        public static Player CreatePlayer(global::System.Int64 playerID, global::System.String @public)
+        public static Player CreatePlayer(global::System.Int64 playerID)
         {
             Player player = new Player();
             player.PlayerID = playerID;
-            player.Public = @public;
             return player;
         }
 
@@ -943,7 +941,7 @@ namespace ProspectRankingDBTool
                 OnPublicChanged();
             }
         }
-        private global::System.String _Public;
+        private global::System.String _Public = "N";
         partial void OnPublicChanging(global::System.String value);
         partial void OnPublicChanged();
 

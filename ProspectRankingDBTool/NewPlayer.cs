@@ -15,5 +15,11 @@ namespace ProspectRankingDBTool
         {
             InitializeComponent();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            BaseballModelContext.Instance.DBContext.Players.AddObject(playerData1.PlayerEntity);
+            BaseballModelContext.Instance.DBContext.SaveChanges();
+        }
     }
 }

@@ -186,6 +186,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(121, 20);
             this.txtFirstName.TabIndex = 12;
+            this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
             // txtLastName
             // 
@@ -193,6 +194,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(121, 20);
             this.txtLastName.TabIndex = 13;
+            this.txtLastName.TextChanged += new System.EventHandler(this.txtLastName_TextChanged);
             // 
             // dateDOB
             // 
@@ -202,6 +204,7 @@
             this.dateDOB.Size = new System.Drawing.Size(122, 20);
             this.dateDOB.TabIndex = 14;
             this.dateDOB.Value = new System.DateTime(1973, 1, 1, 20, 43, 0, 0);
+            this.dateDOB.ValueChanged += new System.EventHandler(this.dateDOB_ValueChanged);
             // 
             // numHeight
             // 
@@ -214,6 +217,7 @@
             this.numHeight.Name = "numHeight";
             this.numHeight.Size = new System.Drawing.Size(120, 20);
             this.numHeight.TabIndex = 15;
+            this.numHeight.ValueChanged += new System.EventHandler(this.numHeight_ValueChanged);
             // 
             // numWeight
             // 
@@ -226,6 +230,7 @@
             this.numWeight.Name = "numWeight";
             this.numWeight.Size = new System.Drawing.Size(120, 20);
             this.numWeight.TabIndex = 16;
+            this.numWeight.ValueChanged += new System.EventHandler(this.numWeight_ValueChanged);
             // 
             // cbOrganization
             // 
@@ -234,6 +239,7 @@
             this.cbOrganization.Name = "cbOrganization";
             this.cbOrganization.Size = new System.Drawing.Size(62, 21);
             this.cbOrganization.TabIndex = 17;
+            this.cbOrganization.SelectedIndexChanged += new System.EventHandler(this.cbOrganization_SelectedIndexChanged);
             // 
             // cbPosition
             // 
@@ -242,6 +248,7 @@
             this.cbPosition.Name = "cbPosition";
             this.cbPosition.Size = new System.Drawing.Size(62, 21);
             this.cbPosition.TabIndex = 18;
+            this.cbPosition.SelectedIndexChanged += new System.EventHandler(this.cbPosition_SelectedIndexChanged);
             // 
             // cbThrow
             // 
@@ -250,6 +257,7 @@
             this.cbThrow.Name = "cbThrow";
             this.cbThrow.Size = new System.Drawing.Size(62, 21);
             this.cbThrow.TabIndex = 19;
+            this.cbThrow.SelectedIndexChanged += new System.EventHandler(this.cbThrow_SelectedIndexChanged);
             // 
             // cbBat
             // 
@@ -258,6 +266,7 @@
             this.cbBat.Name = "cbBat";
             this.cbBat.Size = new System.Drawing.Size(62, 21);
             this.cbBat.TabIndex = 20;
+            this.cbBat.SelectedIndexChanged += new System.EventHandler(this.cbBat_SelectedIndexChanged);
             // 
             // numGradYear
             // 
@@ -270,6 +279,7 @@
             this.numGradYear.Name = "numGradYear";
             this.numGradYear.Size = new System.Drawing.Size(62, 20);
             this.numGradYear.TabIndex = 21;
+            this.numGradYear.ValueChanged += new System.EventHandler(this.numGradYear_ValueChanged);
             // 
             // txtBRUrl
             // 
@@ -277,6 +287,7 @@
             this.txtBRUrl.Name = "txtBRUrl";
             this.txtBRUrl.Size = new System.Drawing.Size(323, 20);
             this.txtBRUrl.TabIndex = 22;
+            this.txtBRUrl.TextChanged += new System.EventHandler(this.txtBRUrl_TextChanged);
             // 
             // txtFGUrl
             // 
@@ -285,6 +296,7 @@
             this.txtFGUrl.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtFGUrl.Size = new System.Drawing.Size(323, 20);
             this.txtFGUrl.TabIndex = 23;
+            this.txtFGUrl.TextChanged += new System.EventHandler(this.txtFGUrl_TextChanged);
             // 
             // checkPublic
             // 
@@ -297,6 +309,7 @@
             this.checkPublic.TabIndex = 24;
             this.checkPublic.Text = "PUBLIC:";
             this.checkPublic.UseVisualStyleBackColor = true;
+            this.checkPublic.CheckedChanged += new System.EventHandler(this.checkPublic_CheckedChanged);
             // 
             // label13
             // 
@@ -348,6 +361,7 @@
             this.Controls.Add(this.label1);
             this.Name = "PlayerData";
             this.Size = new System.Drawing.Size(390, 210);
+            this.Load += new System.EventHandler(this.PlayerData_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numGradYear)).EndInit();

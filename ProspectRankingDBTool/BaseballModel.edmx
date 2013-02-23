@@ -309,7 +309,7 @@
           <Property Name="GraduationYear" Type="Int16" />
           <NavigationProperty Name="Organization1" Relationship="prospectdbModel.FK_Player_Organization" FromRole="Player" ToRole="Organization" />
           <NavigationProperty Name="PlayerRankings" Relationship="prospectdbModel.FK__Player" FromRole="Player" ToRole="PlayerRanking" />
-          <Property Type="String" Name="Public" Nullable="false" />
+          <Property Type="String" Name="Public" Nullable="false" DefaultValue="N" />
         </EntityType>
         <EntityType Name="PlayerList">
           <Key>

@@ -28,17 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.playerData1 = new ProspectRankingDBTool.PlayerData();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.playerData1 = new ProspectRankingDBTool.PlayerData();
             this.SuspendLayout();
-            // 
-            // playerData1
-            // 
-            this.playerData1.Location = new System.Drawing.Point(13, 13);
-            this.playerData1.Name = "playerData1";
-            this.playerData1.Size = new System.Drawing.Size(390, 210);
-            this.playerData1.TabIndex = 0;
             // 
             // btnSave
             // 
@@ -49,6 +42,7 @@
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -59,6 +53,13 @@
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // playerData1
+            // 
+            this.playerData1.Location = new System.Drawing.Point(13, 13);
+            this.playerData1.Name = "playerData1";
+            this.playerData1.Size = new System.Drawing.Size(390, 210);
+            this.playerData1.TabIndex = 0;
             // 
             // NewPlayer
             // 
