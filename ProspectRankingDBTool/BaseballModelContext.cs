@@ -15,6 +15,7 @@ namespace ProspectRankingDBTool
         private List<string> m_batEnum;
         private List<string> m_publicEnum;
         private List<string> m_organizationEnum;
+        private List<string> m_gradesEnum;
 
         private BaseballModelContext()
         {
@@ -72,6 +73,15 @@ namespace ProspectRankingDBTool
             m_publicEnum.Add("Y");
             m_publicEnum.Add("N");
 
+            m_gradesEnum = new List<string>();
+            m_gradesEnum.Add("A");
+            m_gradesEnum.Add("A-");
+            m_gradesEnum.Add("B+");
+            m_gradesEnum.Add("B");
+            m_gradesEnum.Add("B-");
+            m_gradesEnum.Add("C+");
+            m_gradesEnum.Add("C");
+
             m_organizationEnum = new List<string>();
             var query = from it in m_prospectDB.Organizations
                             orderby it.Abbr
@@ -79,6 +89,14 @@ namespace ProspectRankingDBTool
             
             foreach (Organization org in query)
                 m_organizationEnum.Add(org.Abbr);
+        }
+
+        public List<string> Grades
+        {
+            get
+            {
+                return m_gradesEnum;
+            }
         }
 
         public List<string> Organizations

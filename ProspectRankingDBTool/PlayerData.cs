@@ -198,7 +198,7 @@ namespace ProspectRankingDBTool
             }
             else
             {
-                m_player.Weight = (int?)numWeight.Value;
+                m_player.Weight = (short)numWeight.Value;
             }
         }
 

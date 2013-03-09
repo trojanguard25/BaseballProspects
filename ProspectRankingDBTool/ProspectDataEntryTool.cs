@@ -19,7 +19,10 @@ namespace ProspectRankingDBTool
 
         private void btnNewPlayerList_Click(object sender, EventArgs e)
         {
-
+            NewPlayerList form = new NewPlayerList();
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+            }
         }
 
         private void btnViewData_Click(object sender, EventArgs e)

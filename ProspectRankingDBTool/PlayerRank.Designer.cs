@@ -100,6 +100,7 @@
             this.cbPlayerName.Name = "cbPlayerName";
             this.cbPlayerName.Size = new System.Drawing.Size(190, 21);
             this.cbPlayerName.TabIndex = 5;
+            this.cbPlayerName.SelectedIndexChanged += new System.EventHandler(this.cbPlayerName_SelectedIndexChanged);
             // 
             // btnAddPlayer
             // 
@@ -117,6 +118,7 @@
             this.cbOrganization.Name = "cbOrganization";
             this.cbOrganization.Size = new System.Drawing.Size(66, 21);
             this.cbOrganization.TabIndex = 7;
+            this.cbOrganization.SelectedIndexChanged += new System.EventHandler(this.cbOrganization_SelectedIndexChanged);
             // 
             // cbGrade
             // 
@@ -125,6 +127,7 @@
             this.cbGrade.Name = "cbGrade";
             this.cbGrade.Size = new System.Drawing.Size(41, 21);
             this.cbGrade.TabIndex = 9;
+            this.cbGrade.SelectedIndexChanged += new System.EventHandler(this.cbGrade_SelectedIndexChanged);
             // 
             // txtID
             // 
@@ -142,6 +145,7 @@
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // numRank
             // 
@@ -154,6 +158,7 @@
             this.numRank.Name = "numRank";
             this.numRank.Size = new System.Drawing.Size(42, 20);
             this.numRank.TabIndex = 12;
+            this.numRank.ValueChanged += new System.EventHandler(this.numRank_ValueChanged);
             // 
             // PlayerRank
             // 
@@ -173,6 +178,7 @@
             this.Controls.Add(this.label5);
             this.Name = "PlayerRank";
             this.Size = new System.Drawing.Size(338, 173);
+            this.Load += new System.EventHandler(this.PlayerRank_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numRank)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

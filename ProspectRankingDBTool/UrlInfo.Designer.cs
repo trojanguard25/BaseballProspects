@@ -42,6 +42,7 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAddAuthor = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +52,7 @@
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(604, 20);
             this.txtUrl.TabIndex = 0;
+            this.txtUrl.TextChanged += new System.EventHandler(this.txtUrl_TextChanged);
             // 
             // label1
             // 
@@ -125,6 +127,7 @@
             this.cbAuthor.Name = "cbAuthor";
             this.cbAuthor.Size = new System.Drawing.Size(121, 21);
             this.cbAuthor.TabIndex = 8;
+            this.cbAuthor.SelectedIndexChanged += new System.EventHandler(this.cbAuthor_SelectedIndexChanged);
             // 
             // urlDateTime
             // 
@@ -159,9 +162,11 @@
             this.btnSave.TabIndex = 12;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnAddAuthor);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.txtType);
             this.groupBox1.Controls.Add(this.txtID);
@@ -181,6 +186,15 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "URL Information";
+            // 
+            // btnAddAuthor
+            // 
+            this.btnAddAuthor.Location = new System.Drawing.Point(473, 52);
+            this.btnAddAuthor.Name = "btnAddAuthor";
+            this.btnAddAuthor.Size = new System.Drawing.Size(19, 23);
+            this.btnAddAuthor.TabIndex = 13;
+            this.btnAddAuthor.Text = "+";
+            this.btnAddAuthor.UseVisualStyleBackColor = true;
             // 
             // UrlInfo
             // 
@@ -211,5 +225,6 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnAddAuthor;
     }
 }

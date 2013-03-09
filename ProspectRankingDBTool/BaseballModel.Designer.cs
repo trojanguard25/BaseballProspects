@@ -18,14 +18,15 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("prospectdbModel", "FK__Author", "Author", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProspectRankingDBTool.Author), "URL", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.URL), true)]
-[assembly: EdmRelationshipAttribute("prospectdbModel", "FK__Teams", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProspectRankingDBTool.Organization), "PlayerRanking", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.PlayerRanking), true)]
+[assembly: EdmRelationshipAttribute("prospectdbModel", "FK_URL_Author", "Author", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ProspectRankingDBTool.Author), "URL", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.URL), true)]
 [assembly: EdmRelationshipAttribute("prospectdbModel", "FK_Player_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ProspectRankingDBTool.Organization), "Player", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.Player), true)]
 [assembly: EdmRelationshipAttribute("prospectdbModel", "FK_PlayerList_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ProspectRankingDBTool.Organization), "PlayerList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.PlayerList), true)]
-[assembly: EdmRelationshipAttribute("prospectdbModel", "FK_Teams_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ProspectRankingDBTool.Organization), "Teams", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.Team), true)]
-[assembly: EdmRelationshipAttribute("prospectdbModel", "FK__Player", "Player", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProspectRankingDBTool.Player), "PlayerRanking", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.PlayerRanking), true)]
+[assembly: EdmRelationshipAttribute("prospectdbModel", "FK_PlayerRanking_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProspectRankingDBTool.Organization), "PlayerRanking", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.PlayerRanking), true)]
+[assembly: EdmRelationshipAttribute("prospectdbModel", "FK_PlayerRanking_Player", "Player", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProspectRankingDBTool.Player), "PlayerRanking", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.PlayerRanking), true)]
 [assembly: EdmRelationshipAttribute("prospectdbModel", "FK_PlayerList_URL", "URL", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProspectRankingDBTool.URL), "PlayerList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.PlayerList), true)]
-[assembly: EdmRelationshipAttribute("prospectdbModel", "FK__URL", "URL", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProspectRankingDBTool.URL), "PlayerRanking", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.PlayerRanking), true)]
+[assembly: EdmRelationshipAttribute("prospectdbModel", "FK_PlayerRanking_PlayerList", "PlayerList", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProspectRankingDBTool.PlayerList), "PlayerRanking", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.PlayerRanking), true)]
+[assembly: EdmRelationshipAttribute("prospectdbModel", "FK_PlayerRanking_URL", "URL", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProspectRankingDBTool.URL), "PlayerRanking", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.PlayerRanking), true)]
+[assembly: EdmRelationshipAttribute("prospectdbModel", "FK_Teams_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ProspectRankingDBTool.Organization), "Team", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProspectRankingDBTool.Team), true)]
 
 #endregion
 
@@ -160,22 +161,6 @@ namespace ProspectRankingDBTool
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Team> Teams
-        {
-            get
-            {
-                if ((_Teams == null))
-                {
-                    _Teams = base.CreateObjectSet<Team>("Teams");
-                }
-                return _Teams;
-            }
-        }
-        private ObjectSet<Team> _Teams;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<URL> URLs
         {
             get
@@ -188,6 +173,22 @@ namespace ProspectRankingDBTool
             }
         }
         private ObjectSet<URL> _URLs;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Team> Teams
+        {
+            get
+            {
+                if ((_Teams == null))
+                {
+                    _Teams = base.CreateObjectSet<Team>("Teams");
+                }
+                return _Teams;
+            }
+        }
+        private ObjectSet<Team> _Teams;
 
         #endregion
         #region AddTo Methods
@@ -233,19 +234,19 @@ namespace ProspectRankingDBTool
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Teams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTeams(Team team)
-        {
-            base.AddObject("Teams", team);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the URLs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToURLs(URL uRL)
         {
             base.AddObject("URLs", uRL);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Teams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTeams(Team team)
+        {
+            base.AddObject("Teams", team);
         }
 
         #endregion
@@ -270,7 +271,7 @@ namespace ProspectRankingDBTool
         /// Create a new Author object.
         /// </summary>
         /// <param name="authorID">Initial value of the AuthorID property.</param>
-        public static Author CreateAuthor(global::System.Int64 authorID)
+        public static Author CreateAuthor(global::System.Int32 authorID)
         {
             Author author = new Author();
             author.AuthorID = authorID;
@@ -285,7 +286,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 AuthorID
+        public global::System.Int32 AuthorID
         {
             get
             {
@@ -303,8 +304,8 @@ namespace ProspectRankingDBTool
                 }
             }
         }
-        private global::System.Int64 _AuthorID;
-        partial void OnAuthorIDChanging(global::System.Int64 value);
+        private global::System.Int32 _AuthorID;
+        partial void OnAuthorIDChanging(global::System.Int32 value);
         partial void OnAuthorIDChanged();
     
         /// <summary>
@@ -365,18 +366,18 @@ namespace ProspectRankingDBTool
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK__Author", "URL")]
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_URL_Author", "URL")]
         public EntityCollection<URL> URLs
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<URL>("prospectdbModel.FK__Author", "URL");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<URL>("prospectdbModel.FK_URL_Author", "URL");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<URL>("prospectdbModel.FK__Author", "URL", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<URL>("prospectdbModel.FK_URL_Author", "URL", value);
                 }
             }
         }
@@ -400,7 +401,7 @@ namespace ProspectRankingDBTool
         /// <param name="organizationId">Initial value of the OrganizationId property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="abbr">Initial value of the Abbr property.</param>
-        public static Organization CreateOrganization(global::System.Int64 organizationId, global::System.String name, global::System.String abbr)
+        public static Organization CreateOrganization(global::System.Int32 organizationId, global::System.String name, global::System.String abbr)
         {
             Organization organization = new Organization();
             organization.OrganizationId = organizationId;
@@ -417,7 +418,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 OrganizationId
+        public global::System.Int32 OrganizationId
         {
             get
             {
@@ -432,8 +433,8 @@ namespace ProspectRankingDBTool
                 OnOrganizationIdChanged();
             }
         }
-        private global::System.Int64 _OrganizationId;
-        partial void OnOrganizationIdChanging(global::System.Int64 value);
+        private global::System.Int32 _OrganizationId;
+        partial void OnOrganizationIdChanging(global::System.Int32 value);
         partial void OnOrganizationIdChanged();
     
         /// <summary>
@@ -497,28 +498,6 @@ namespace ProspectRankingDBTool
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK__Teams", "PlayerRanking")]
-        public EntityCollection<PlayerRanking> PlayerRankings
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PlayerRanking>("prospectdbModel.FK__Teams", "PlayerRanking");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PlayerRanking>("prospectdbModel.FK__Teams", "PlayerRanking", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_Player_Organization", "Player")]
         public EntityCollection<Player> Players
         {
@@ -563,18 +542,40 @@ namespace ProspectRankingDBTool
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_Teams_Organization", "Teams")]
-        public EntityCollection<Team> Teams
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_PlayerRanking_Organization", "PlayerRanking")]
+        public EntityCollection<PlayerRanking> PlayerRankings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Team>("prospectdbModel.FK_Teams_Organization", "Teams");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PlayerRanking>("prospectdbModel.FK_PlayerRanking_Organization", "PlayerRanking");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Team>("prospectdbModel.FK_Teams_Organization", "Teams", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PlayerRanking>("prospectdbModel.FK_PlayerRanking_Organization", "PlayerRanking", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_Teams_Organization", "Team")]
+        public EntityCollection<Team> Teams
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Team>("prospectdbModel.FK_Teams_Organization", "Team");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Team>("prospectdbModel.FK_Teams_Organization", "Team", value);
                 }
             }
         }
@@ -596,10 +597,12 @@ namespace ProspectRankingDBTool
         /// Create a new Player object.
         /// </summary>
         /// <param name="playerID">Initial value of the PlayerID property.</param>
-        public static Player CreatePlayer(global::System.Int64 playerID)
+        /// <param name="public">Initial value of the Public property.</param>
+        public static Player CreatePlayer(global::System.Int32 playerID, global::System.String @public)
         {
             Player player = new Player();
             player.PlayerID = playerID;
+            player.Public = @public;
             return player;
         }
 
@@ -611,7 +614,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 PlayerID
+        public global::System.Int32 PlayerID
         {
             get
             {
@@ -629,8 +632,8 @@ namespace ProspectRankingDBTool
                 }
             }
         }
-        private global::System.Int64 _PlayerID;
-        partial void OnPlayerIDChanging(global::System.Int64 value);
+        private global::System.Int32 _PlayerID;
+        partial void OnPlayerIDChanging(global::System.Int32 value);
         partial void OnPlayerIDChanged();
     
         /// <summary>
@@ -758,7 +761,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Byte> Height
+        public Nullable<global::System.Int16> Height
         {
             get
             {
@@ -773,8 +776,8 @@ namespace ProspectRankingDBTool
                 OnHeightChanged();
             }
         }
-        private Nullable<global::System.Byte> _Height;
-        partial void OnHeightChanging(Nullable<global::System.Byte> value);
+        private Nullable<global::System.Int16> _Height;
+        partial void OnHeightChanging(Nullable<global::System.Int16> value);
         partial void OnHeightChanged();
     
         /// <summary>
@@ -782,7 +785,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Weight
+        public Nullable<global::System.Int16> Weight
         {
             get
             {
@@ -797,8 +800,8 @@ namespace ProspectRankingDBTool
                 OnWeightChanged();
             }
         }
-        private Nullable<global::System.Int32> _Weight;
-        partial void OnWeightChanging(Nullable<global::System.Int32> value);
+        private Nullable<global::System.Int16> _Weight;
+        partial void OnWeightChanging(Nullable<global::System.Int16> value);
         partial void OnWeightChanged();
     
         /// <summary>
@@ -941,7 +944,7 @@ namespace ProspectRankingDBTool
                 OnPublicChanged();
             }
         }
-        private global::System.String _Public = "N";
+        private global::System.String _Public;
         partial void OnPublicChanging(global::System.String value);
         partial void OnPublicChanged();
 
@@ -993,18 +996,18 @@ namespace ProspectRankingDBTool
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK__Player", "PlayerRanking")]
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_PlayerRanking_Player", "PlayerRanking")]
         public EntityCollection<PlayerRanking> PlayerRankings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PlayerRanking>("prospectdbModel.FK__Player", "PlayerRanking");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PlayerRanking>("prospectdbModel.FK_PlayerRanking_Player", "PlayerRanking");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PlayerRanking>("prospectdbModel.FK__Player", "PlayerRanking", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PlayerRanking>("prospectdbModel.FK_PlayerRanking_Player", "PlayerRanking", value);
                 }
             }
         }
@@ -1031,7 +1034,7 @@ namespace ProspectRankingDBTool
         /// <param name="season">Initial value of the Season property.</param>
         /// <param name="number">Initial value of the Number property.</param>
         /// <param name="public">Initial value of the Public property.</param>
-        public static PlayerList CreatePlayerList(global::System.Int64 playerListID, global::System.Int64 uRLID, global::System.Int16 year, global::System.String season, global::System.Byte number, global::System.String @public)
+        public static PlayerList CreatePlayerList(global::System.Int32 playerListID, global::System.Int32 uRLID, global::System.Int16 year, global::System.String season, global::System.Int16 number, global::System.String @public)
         {
             PlayerList playerList = new PlayerList();
             playerList.PlayerListID = playerListID;
@@ -1051,7 +1054,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 PlayerListID
+        public global::System.Int32 PlayerListID
         {
             get
             {
@@ -1069,8 +1072,8 @@ namespace ProspectRankingDBTool
                 }
             }
         }
-        private global::System.Int64 _PlayerListID;
-        partial void OnPlayerListIDChanging(global::System.Int64 value);
+        private global::System.Int32 _PlayerListID;
+        partial void OnPlayerListIDChanging(global::System.Int32 value);
         partial void OnPlayerListIDChanged();
     
         /// <summary>
@@ -1078,7 +1081,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 URLID
+        public global::System.Int32 URLID
         {
             get
             {
@@ -1093,8 +1096,8 @@ namespace ProspectRankingDBTool
                 OnURLIDChanged();
             }
         }
-        private global::System.Int64 _URLID;
-        partial void OnURLIDChanging(global::System.Int64 value);
+        private global::System.Int32 _URLID;
+        partial void OnURLIDChanging(global::System.Int32 value);
         partial void OnURLIDChanged();
     
         /// <summary>
@@ -1198,7 +1201,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte Number
+        public global::System.Int16 Number
         {
             get
             {
@@ -1213,8 +1216,8 @@ namespace ProspectRankingDBTool
                 OnNumberChanged();
             }
         }
-        private global::System.Byte _Number;
-        partial void OnNumberChanging(global::System.Byte value);
+        private global::System.Int16 _Number;
+        partial void OnNumberChanging(global::System.Int16 value);
         partial void OnNumberChanged();
     
         /// <summary>
@@ -1320,6 +1323,28 @@ namespace ProspectRankingDBTool
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_PlayerRanking_PlayerList", "PlayerRanking")]
+        public EntityCollection<PlayerRanking> PlayerRankings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PlayerRanking>("prospectdbModel.FK_PlayerRanking_PlayerList", "PlayerRanking");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PlayerRanking>("prospectdbModel.FK_PlayerRanking_PlayerList", "PlayerRanking", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -1341,13 +1366,15 @@ namespace ProspectRankingDBTool
         /// <param name="organizationID">Initial value of the OrganizationID property.</param>
         /// <param name="urlID">Initial value of the UrlID property.</param>
         /// <param name="public">Initial value of the Public property.</param>
-        public static PlayerRanking CreatePlayerRanking(global::System.Int64 playerID, global::System.String organizationID, global::System.Int64 urlID, global::System.String @public)
+        /// <param name="listID">Initial value of the ListID property.</param>
+        public static PlayerRanking CreatePlayerRanking(global::System.Int32 playerID, global::System.String organizationID, global::System.Int32 urlID, global::System.String @public, global::System.Int32 listID)
         {
             PlayerRanking playerRanking = new PlayerRanking();
             playerRanking.PlayerID = playerID;
             playerRanking.OrganizationID = organizationID;
             playerRanking.UrlID = urlID;
             playerRanking.Public = @public;
+            playerRanking.ListID = listID;
             return playerRanking;
         }
 
@@ -1359,7 +1386,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 PlayerID
+        public global::System.Int32 PlayerID
         {
             get
             {
@@ -1377,14 +1404,14 @@ namespace ProspectRankingDBTool
                 }
             }
         }
-        private global::System.Int64 _PlayerID;
-        partial void OnPlayerIDChanging(global::System.Int64 value);
+        private global::System.Int32 _PlayerID;
+        partial void OnPlayerIDChanging(global::System.Int32 value);
         partial void OnPlayerIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String OrganizationID
         {
@@ -1394,14 +1421,11 @@ namespace ProspectRankingDBTool
             }
             set
             {
-                if (_OrganizationID != value)
-                {
-                    OnOrganizationIDChanging(value);
-                    ReportPropertyChanging("OrganizationID");
-                    _OrganizationID = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("OrganizationID");
-                    OnOrganizationIDChanged();
-                }
+                OnOrganizationIDChanging(value);
+                ReportPropertyChanging("OrganizationID");
+                _OrganizationID = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("OrganizationID");
+                OnOrganizationIDChanged();
             }
         }
         private global::System.String _OrganizationID;
@@ -1411,9 +1435,9 @@ namespace ProspectRankingDBTool
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 UrlID
+        public global::System.Int32 UrlID
         {
             get
             {
@@ -1421,18 +1445,15 @@ namespace ProspectRankingDBTool
             }
             set
             {
-                if (_UrlID != value)
-                {
-                    OnUrlIDChanging(value);
-                    ReportPropertyChanging("UrlID");
-                    _UrlID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UrlID");
-                    OnUrlIDChanged();
-                }
+                OnUrlIDChanging(value);
+                ReportPropertyChanging("UrlID");
+                _UrlID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UrlID");
+                OnUrlIDChanged();
             }
         }
-        private global::System.Int64 _UrlID;
-        partial void OnUrlIDChanging(global::System.Int64 value);
+        private global::System.Int32 _UrlID;
+        partial void OnUrlIDChanging(global::System.Int32 value);
         partial void OnUrlIDChanged();
     
         /// <summary>
@@ -1506,6 +1527,33 @@ namespace ProspectRankingDBTool
         private global::System.String _Public;
         partial void OnPublicChanging(global::System.String value);
         partial void OnPublicChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ListID
+        {
+            get
+            {
+                return _ListID;
+            }
+            set
+            {
+                if (_ListID != value)
+                {
+                    OnListIDChanging(value);
+                    ReportPropertyChanging("ListID");
+                    _ListID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ListID");
+                    OnListIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ListID;
+        partial void OnListIDChanging(global::System.Int32 value);
+        partial void OnListIDChanged();
 
         #endregion
     
@@ -1517,16 +1565,16 @@ namespace ProspectRankingDBTool
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK__Teams", "Organization")]
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_PlayerRanking_Organization", "Organization")]
         public Organization Organization
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("prospectdbModel.FK__Teams", "Organization").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("prospectdbModel.FK_PlayerRanking_Organization", "Organization").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("prospectdbModel.FK__Teams", "Organization").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("prospectdbModel.FK_PlayerRanking_Organization", "Organization").Value = value;
             }
         }
         /// <summary>
@@ -1538,13 +1586,13 @@ namespace ProspectRankingDBTool
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("prospectdbModel.FK__Teams", "Organization");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("prospectdbModel.FK_PlayerRanking_Organization", "Organization");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("prospectdbModel.FK__Teams", "Organization", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("prospectdbModel.FK_PlayerRanking_Organization", "Organization", value);
                 }
             }
         }
@@ -1555,16 +1603,16 @@ namespace ProspectRankingDBTool
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK__Player", "Player")]
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_PlayerRanking_Player", "Player")]
         public Player Player
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Player>("prospectdbModel.FK__Player", "Player").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Player>("prospectdbModel.FK_PlayerRanking_Player", "Player").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Player>("prospectdbModel.FK__Player", "Player").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Player>("prospectdbModel.FK_PlayerRanking_Player", "Player").Value = value;
             }
         }
         /// <summary>
@@ -1576,13 +1624,13 @@ namespace ProspectRankingDBTool
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Player>("prospectdbModel.FK__Player", "Player");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Player>("prospectdbModel.FK_PlayerRanking_Player", "Player");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Player>("prospectdbModel.FK__Player", "Player", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Player>("prospectdbModel.FK_PlayerRanking_Player", "Player", value);
                 }
             }
         }
@@ -1593,16 +1641,54 @@ namespace ProspectRankingDBTool
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK__URL", "URL")]
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_PlayerRanking_PlayerList", "PlayerList")]
+        public PlayerList PlayerList
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PlayerList>("prospectdbModel.FK_PlayerRanking_PlayerList", "PlayerList").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PlayerList>("prospectdbModel.FK_PlayerRanking_PlayerList", "PlayerList").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PlayerList> PlayerListReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PlayerList>("prospectdbModel.FK_PlayerRanking_PlayerList", "PlayerList");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PlayerList>("prospectdbModel.FK_PlayerRanking_PlayerList", "PlayerList", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_PlayerRanking_URL", "URL")]
         public URL URL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<URL>("prospectdbModel.FK__URL", "URL").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<URL>("prospectdbModel.FK_PlayerRanking_URL", "URL").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<URL>("prospectdbModel.FK__URL", "URL").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<URL>("prospectdbModel.FK_PlayerRanking_URL", "URL").Value = value;
             }
         }
         /// <summary>
@@ -1614,13 +1700,13 @@ namespace ProspectRankingDBTool
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<URL>("prospectdbModel.FK__URL", "URL");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<URL>("prospectdbModel.FK_PlayerRanking_URL", "URL");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<URL>("prospectdbModel.FK__URL", "URL", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<URL>("prospectdbModel.FK_PlayerRanking_URL", "URL", value);
                 }
             }
         }
@@ -1643,7 +1729,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         /// <param name="teamID">Initial value of the TeamID property.</param>
         /// <param name="level">Initial value of the Level property.</param>
-        public static Team CreateTeam(global::System.Int64 teamID, global::System.String level)
+        public static Team CreateTeam(global::System.Int32 teamID, global::System.String level)
         {
             Team team = new Team();
             team.TeamID = teamID;
@@ -1659,7 +1745,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 TeamID
+        public global::System.Int32 TeamID
         {
             get
             {
@@ -1677,8 +1763,8 @@ namespace ProspectRankingDBTool
                 }
             }
         }
-        private global::System.Int64 _TeamID;
-        partial void OnTeamIDChanging(global::System.Int64 value);
+        private global::System.Int32 _TeamID;
+        partial void OnTeamIDChanging(global::System.Int32 value);
         partial void OnTeamIDChanged();
     
         /// <summary>
@@ -1860,13 +1946,11 @@ namespace ProspectRankingDBTool
         /// Create a new URL object.
         /// </summary>
         /// <param name="urlID">Initial value of the UrlID property.</param>
-        /// <param name="author">Initial value of the Author property.</param>
         /// <param name="uRL1">Initial value of the URL1 property.</param>
-        public static URL CreateURL(global::System.Int64 urlID, global::System.Int64 author, global::System.String uRL1)
+        public static URL CreateURL(global::System.Int32 urlID, global::System.String uRL1)
         {
             URL uRL = new URL();
             uRL.UrlID = urlID;
-            uRL.Author = author;
             uRL.URL1 = uRL1;
             return uRL;
         }
@@ -1879,7 +1963,7 @@ namespace ProspectRankingDBTool
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 UrlID
+        public global::System.Int32 UrlID
         {
             get
             {
@@ -1897,16 +1981,16 @@ namespace ProspectRankingDBTool
                 }
             }
         }
-        private global::System.Int64 _UrlID;
-        partial void OnUrlIDChanging(global::System.Int64 value);
+        private global::System.Int32 _UrlID;
+        partial void OnUrlIDChanging(global::System.Int32 value);
         partial void OnUrlIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int64 Author
+        public Nullable<global::System.Int32> Author
         {
             get
             {
@@ -1921,8 +2005,8 @@ namespace ProspectRankingDBTool
                 OnAuthorChanged();
             }
         }
-        private global::System.Int64 _Author;
-        partial void OnAuthorChanging(global::System.Int64 value);
+        private Nullable<global::System.Int32> _Author;
+        partial void OnAuthorChanging(Nullable<global::System.Int32> value);
         partial void OnAuthorChanged();
     
         /// <summary>
@@ -2007,16 +2091,16 @@ namespace ProspectRankingDBTool
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK__Author", "Author")]
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_URL_Author", "Author")]
         public Author Author1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("prospectdbModel.FK__Author", "Author").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("prospectdbModel.FK_URL_Author", "Author").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("prospectdbModel.FK__Author", "Author").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("prospectdbModel.FK_URL_Author", "Author").Value = value;
             }
         }
         /// <summary>
@@ -2028,13 +2112,13 @@ namespace ProspectRankingDBTool
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("prospectdbModel.FK__Author", "Author");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("prospectdbModel.FK_URL_Author", "Author");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Author>("prospectdbModel.FK__Author", "Author", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Author>("prospectdbModel.FK_URL_Author", "Author", value);
                 }
             }
         }
@@ -2067,18 +2151,18 @@ namespace ProspectRankingDBTool
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK__URL", "PlayerRanking")]
+        [EdmRelationshipNavigationPropertyAttribute("prospectdbModel", "FK_PlayerRanking_URL", "PlayerRanking")]
         public EntityCollection<PlayerRanking> PlayerRankings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PlayerRanking>("prospectdbModel.FK__URL", "PlayerRanking");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PlayerRanking>("prospectdbModel.FK_PlayerRanking_URL", "PlayerRanking");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PlayerRanking>("prospectdbModel.FK__URL", "PlayerRanking", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PlayerRanking>("prospectdbModel.FK_PlayerRanking_URL", "PlayerRanking", value);
                 }
             }
         }
