@@ -728,7 +728,7 @@ namespace ProspectRankingDBTool
                 OnOrganizationChanged();
             }
         }
-        private global::System.String _Organization;
+        private global::System.String _Organization = "MLB";
         partial void OnOrganizationChanging(global::System.String value);
         partial void OnOrganizationChanged();
     
@@ -1120,7 +1120,7 @@ namespace ProspectRankingDBTool
                 OnOrganizationChanged();
             }
         }
-        private global::System.String _Organization;
+        private global::System.String _Organization = "MLB";
         partial void OnOrganizationChanging(global::System.String value);
         partial void OnOrganizationChanged();
     
@@ -1363,15 +1363,13 @@ namespace ProspectRankingDBTool
         /// Create a new PlayerRanking object.
         /// </summary>
         /// <param name="playerID">Initial value of the PlayerID property.</param>
-        /// <param name="organizationID">Initial value of the OrganizationID property.</param>
         /// <param name="urlID">Initial value of the UrlID property.</param>
         /// <param name="public">Initial value of the Public property.</param>
         /// <param name="listID">Initial value of the ListID property.</param>
-        public static PlayerRanking CreatePlayerRanking(global::System.Int32 playerID, global::System.String organizationID, global::System.Int32 urlID, global::System.String @public, global::System.Int32 listID)
+        public static PlayerRanking CreatePlayerRanking(global::System.Int32 playerID, global::System.Int32 urlID, global::System.String @public, global::System.Int32 listID)
         {
             PlayerRanking playerRanking = new PlayerRanking();
             playerRanking.PlayerID = playerID;
-            playerRanking.OrganizationID = organizationID;
             playerRanking.UrlID = urlID;
             playerRanking.Public = @public;
             playerRanking.ListID = listID;
@@ -1428,7 +1426,7 @@ namespace ProspectRankingDBTool
                 OnOrganizationIDChanged();
             }
         }
-        private global::System.String _OrganizationID;
+        private global::System.String _OrganizationID = "MLB";
         partial void OnOrganizationIDChanging(global::System.String value);
         partial void OnOrganizationIDChanged();
     
@@ -1947,11 +1945,13 @@ namespace ProspectRankingDBTool
         /// </summary>
         /// <param name="urlID">Initial value of the UrlID property.</param>
         /// <param name="uRL1">Initial value of the URL1 property.</param>
-        public static URL CreateURL(global::System.Int32 urlID, global::System.String uRL1)
+        /// <param name="public">Initial value of the Public property.</param>
+        public static URL CreateURL(global::System.Int32 urlID, global::System.String uRL1, global::System.String @public)
         {
             URL uRL = new URL();
             uRL.UrlID = urlID;
             uRL.URL1 = uRL1;
+            uRL.Public = @public;
             return uRL;
         }
 
@@ -2080,6 +2080,30 @@ namespace ProspectRankingDBTool
         private global::System.String _URL1;
         partial void OnURL1Changing(global::System.String value);
         partial void OnURL1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Public
+        {
+            get
+            {
+                return _Public;
+            }
+            set
+            {
+                OnPublicChanging(value);
+                ReportPropertyChanging("Public");
+                _Public = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Public");
+                OnPublicChanged();
+            }
+        }
+        private global::System.String _Public;
+        partial void OnPublicChanging(global::System.String value);
+        partial void OnPublicChanged();
 
         #endregion
     

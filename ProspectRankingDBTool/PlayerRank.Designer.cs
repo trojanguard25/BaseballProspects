@@ -110,6 +110,7 @@
             this.btnAddPlayer.TabIndex = 6;
             this.btnAddPlayer.Text = "+";
             this.btnAddPlayer.UseVisualStyleBackColor = true;
+            this.btnAddPlayer.Click += new System.EventHandler(this.btnAddPlayer_Click);
             // 
             // cbOrganization
             // 

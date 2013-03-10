@@ -102,6 +102,8 @@ namespace ProspectRankingDBTool
                         }
                     }
                 }
+
+                checkPublic.Checked = (m_url.Public == "Y");
             }
         }
 
@@ -110,6 +112,8 @@ namespace ProspectRankingDBTool
             m_context.DBContext.SaveChanges();
 
             txtID.Text = m_url.UrlID.ToString();
+
+            btnSave.Enabled = false;
         }
 
         private void txtUrl_TextChanged(object sender, EventArgs e)
@@ -125,6 +129,29 @@ namespace ProspectRankingDBTool
             if (m_url != null)
             {
                 m_url.Author1 = m_authors.ElementAt(cbAuthor.SelectedIndex).GetAuthor();
+            }
+        }
+
+        private void checkPublic_CheckedChanged(object sender, EventArgs e)
+        {
+            if (m_url != null)
+            {
+                if (checkPublic.Checked)
+                {
+                    m_url.Public = "Y";
+                }
+                else
+                {
+                    m_url.Public = "N";
+                }
+            }
+        }
+
+        private void urlDateTime_ValueChanged(object sender, EventArgs e)
+        {
+            if (m_url != null)
+            {
+                m_url.Date = urlDateTime.Value;
             }
         }
     }

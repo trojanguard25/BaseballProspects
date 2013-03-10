@@ -38,6 +38,8 @@ namespace ProspectRankingDBTool
         private List<PlayerInfo> m_players;
         private List<string> m_organizationEnum;
         private List<string> m_gradesEnum;
+        private PlayerList m_playerList;
+        private URL m_url;
 
         public PlayerRank()
         {
@@ -55,6 +57,22 @@ namespace ProspectRankingDBTool
         {
         }*/
 
+        public PlayerList PlayerListRef
+        {
+            set
+            {
+                m_playerList = value;
+            }
+        }
+
+        public URL UrlRef
+        {
+            set
+            {
+                m_url = value;
+            }
+        }
+
         public PlayerRanking PlayerRankValue
         {
             get
@@ -71,6 +89,15 @@ namespace ProspectRankingDBTool
                     if (selectedIndex >= 0)
                     {
                         cbOrganization.SelectedIndex = selectedIndex;
+                    }
+                    else if (m_playerList != null)
+                    {
+                        selectedIndex = m_organizationEnum.IndexOf(m_playerList.Organization);
+                        if (selectedIndex >= 0)
+                        {
+                            cbOrganization.SelectedIndex = selectedIndex;
+                            m_playerRanking.OrganizationID = m_playerList.Organization;
+                        }
                     }
 
                     selectedIndex = m_gradesEnum.IndexOf(m_playerRanking.Grade);
@@ -90,23 +117,59 @@ namespace ProspectRankingDBTool
         private void InitPlayerRanking()
         {
             m_organizationEnum = new List<string>(m_context.Organizations);
-            m_organizationEnum.Insert(0, "");
             cbOrganization.DataSource = m_organizationEnum;
 
             m_gradesEnum = new List<string>(m_context.Grades);
             m_gradesEnum.Insert(0, "");
             cbGrade.DataSource = m_gradesEnum;
 
-            m_players = new List<PlayerInfo>();
-            
-            var query = from it in m_context.DBContext.Players
-                        orderby it.Lastname, it.Firstname
-                        select it;
+            UpdatePlayerList();
+        }
 
-            foreach (Player player in query)
+        private void UpdatePlayerList()
+        {
+            if (m_players == null)
             {
-                PlayerInfo playerInfo = new PlayerInfo(player);
-                m_players.Add(playerInfo);
+                m_players = new List<PlayerInfo>();
+            }
+            else
+            {
+                m_players.Clear();
+            }
+
+            if (m_playerList != null && m_playerList.Organization != "MLB")
+            {
+                var query = from it in m_context.DBContext.Players
+                            where it.Organization == m_playerList.Organization
+                            orderby it.Lastname, it.Firstname
+                            select it;
+                foreach (Player player in query)
+                {
+                    PlayerInfo playerInfo = new PlayerInfo(player);
+                    m_players.Add(playerInfo);
+                }
+                
+                query = from it in m_context.DBContext.Players
+                            where it.Organization != m_playerList.Organization
+                            orderby it.Lastname, it.Firstname
+                            select it;
+                foreach (Player player in query)
+                {
+                    PlayerInfo playerInfo = new PlayerInfo(player);
+                    m_players.Add(playerInfo);
+                }
+            }
+            else
+            {
+                var query = from it in m_context.DBContext.Players
+                            orderby it.Lastname, it.Firstname
+                            select it;
+
+                foreach (Player player in query)
+                {
+                    PlayerInfo playerInfo = new PlayerInfo(player);
+                    m_players.Add(playerInfo);
+                }
             }
 
             cbPlayerName.DataSource = m_players;
@@ -114,6 +177,8 @@ namespace ProspectRankingDBTool
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            m_playerRanking.PlayerList = m_playerList;
+            m_playerRanking.URL = m_url;
             m_context.DBContext.SaveChanges();
         }
 
@@ -156,6 +221,15 @@ namespace ProspectRankingDBTool
             if (m_playerRanking != null)
             {
                 m_playerRanking.Rank = (sbyte)numRank.Value;
+            }
+        }
+
+        private void btnAddPlayer_Click(object sender, EventArgs e)
+        {
+            NewPlayer form = new NewPlayer();
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                UpdatePlayerList();
             }
         }
     }

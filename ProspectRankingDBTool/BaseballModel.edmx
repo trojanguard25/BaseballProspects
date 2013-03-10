@@ -131,6 +131,7 @@
           <Property Name="Date" Type="date" />
           <Property Name="Type" Type="enum" />
           <Property Name="URL" Type="text" Nullable="false" />
+          <Property Name="Public" Type="enum" Nullable="false" />
         </EntityType>
         <Association Name="FK_Player_Organization">
           <End Role="Organization" Type="prospectdbModel.Store.Organization" Multiplicity="0..1" />
@@ -318,7 +319,7 @@
           <Property Type="String" Name="Firstname" />
           <Property Type="String" Name="Lastname" />
           <Property Type="DateTime" Name="DOB" />
-          <Property Type="String" Name="Organization" />
+          <Property Type="String" Name="Organization" DefaultValue="MLB" />
           <Property Type="String" Name="Position" />
           <Property Type="Int16" Name="Height" />
           <Property Type="Int16" Name="Weight" />
@@ -337,7 +338,7 @@
           </Key>
           <Property Type="Int32" Name="PlayerListID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="URLID" Nullable="false" />
-          <Property Type="String" Name="Organization" />
+          <Property Type="String" Name="Organization" DefaultValue="MLB" />
           <Property Type="String" Name="Position" />
           <Property Type="Int16" Name="Year" Nullable="false" />
           <Property Type="String" Name="Season" Nullable="false" />
@@ -353,7 +354,7 @@
             <PropertyRef Name="ListID" />
           </Key>
           <Property Type="Int32" Name="PlayerID" Nullable="false" />
-          <Property Type="String" Name="OrganizationID" Nullable="false" />
+          <Property Type="String" Name="OrganizationID" Nullable="false" DefaultValue="MLB" />
           <Property Type="Int32" Name="UrlID" Nullable="false" />
           <Property Type="SByte" Name="Rank" />
           <Property Type="String" Name="Grade" />
@@ -376,6 +377,7 @@
           <NavigationProperty Name="Author1" Relationship="prospectdbModel.FK_URL_Author" FromRole="URL" ToRole="Author" />
           <NavigationProperty Name="PlayerLists" Relationship="prospectdbModel.FK_PlayerList_URL" FromRole="URL" ToRole="PlayerList" />
           <NavigationProperty Name="PlayerRankings" Relationship="prospectdbModel.FK_PlayerRanking_URL" FromRole="URL" ToRole="PlayerRanking" />
+          <Property Type="String" Name="Public" Nullable="false" />
         </EntityType>
         <Association Name="FK_URL_Author">
           <End Type="prospectdbModel.Author" Role="Author" Multiplicity="0..1" />
@@ -571,6 +573,7 @@
           <EntitySetMapping Name="URLs">
             <EntityTypeMapping TypeName="prospectdbModel.URL">
               <MappingFragment StoreEntitySet="URL">
+                <ScalarProperty Name="Public" ColumnName="Public" />
                 <ScalarProperty Name="URL1" ColumnName="URL" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Date" ColumnName="Date" />

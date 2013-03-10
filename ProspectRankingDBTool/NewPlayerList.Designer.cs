@@ -292,7 +292,6 @@
             this.urlInfo1.Name = "urlInfo1";
             this.urlInfo1.Size = new System.Drawing.Size(705, 133);
             this.urlInfo1.TabIndex = 0;
-            this.urlInfo1.URLObject = null;
             // 
             // NewPlayerList
             // 

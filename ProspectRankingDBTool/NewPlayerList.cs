@@ -21,8 +21,6 @@ namespace ProspectRankingDBTool
         private string m_PreSeason = "Pre";
         private string m_InSeason = "In";
 
-        private bool m_playerListAdded = false;
-
         public NewPlayerList()
         {
             InitializeComponent();
@@ -43,6 +41,9 @@ namespace ProspectRankingDBTool
             m_url = new URL();
             m_playerList = new PlayerList();
 
+            m_url.Public = "Y";
+            m_playerList.Public = "Y";
+
             urlInfo1.URLObject = m_url;
 
             m_playerList.Number = (byte)numRankings.Value;
@@ -54,12 +55,38 @@ namespace ProspectRankingDBTool
 
             m_positionEnum = new List<string>(m_context.Positions);
             m_positionEnum.Insert(0, "");
+            cbPosition.DataSource = m_positionEnum;
+            SetCBIndex(m_playerList.Position, m_positionEnum, cbPosition);
+
             m_organizationEnum = new List<string>(m_context.Organizations);
-            m_organizationEnum.Insert(0, "");
+            cbOrganization.DataSource = m_organizationEnum;
+            SetCBIndex(m_playerList.Organization, m_organizationEnum, cbOrganization);
 
             hScrollBar1.Maximum = 1;
 
             m_context.DBContext.URLs.AddObject(m_url);
+            m_context.DBContext.PlayerLists.AddObject(m_playerList);
+        }
+
+        private void SetCBIndex(string currentValue, List<string> dataList, ComboBox cb)
+        {
+            if (currentValue.Length > 0)
+            {
+                int posID = dataList.FindIndex(s => s == currentValue);
+                if (posID < 0)
+                {
+                    dataList.Add(currentValue);
+                    cb.SelectedIndex = dataList.Count - 1;
+                }
+                else
+                {
+                    cb.SelectedIndex = posID;
+                }
+            }
+            else
+            {
+                cb.SelectedIndex = 0;
+            }
         }
 
         private void rbPreSeason_CheckedChanged(object sender, EventArgs e)
@@ -110,12 +137,6 @@ namespace ProspectRankingDBTool
             if (m_context == null)
                 return;
 
-            if (!m_playerListAdded)
-            {
-                m_context.DBContext.PlayerLists.AddObject(m_playerList);
-                m_playerListAdded = true;
-            }
-
             m_context.DBContext.SaveChanges();
 
             hScrollBar1.Maximum = (int)numRankings.Value;
@@ -125,14 +146,14 @@ namespace ProspectRankingDBTool
             for (int i = 0; i < numRankings.Value; i++)
             {
                 PlayerRanking player = new PlayerRanking();
-                player.URL = m_url;
-                player.PlayerList = m_playerList;
                 player.Rank = (sbyte)(i+1);
-                m_context.DBContext.PlayerRankings.AddObject(player);
+                player.Public = m_playerList.Public;
                 m_playerRankingsList.Add(player);
             }
 
             playerRank1.PlayerRankValue = m_playerRankingsList[0];
+            playerRank1.PlayerListRef = m_playerList;
+            playerRank1.UrlRef = m_url;
 
             btnSave.Enabled = false;
         }

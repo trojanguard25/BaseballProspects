@@ -43,6 +43,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAddAuthor = new System.Windows.Forms.Button();
+            this.checkPublic = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,7 +104,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(284, 58);
+            this.label4.Location = new System.Drawing.Point(222, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 6;
@@ -113,7 +114,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(301, 93);
+            this.label5.Location = new System.Drawing.Point(239, 93);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 13);
             this.label5.TabIndex = 7;
@@ -123,7 +124,7 @@
             // cbAuthor
             // 
             this.cbAuthor.FormattingEnabled = true;
-            this.cbAuthor.Location = new System.Drawing.Point(346, 54);
+            this.cbAuthor.Location = new System.Drawing.Point(284, 54);
             this.cbAuthor.Name = "cbAuthor";
             this.cbAuthor.Size = new System.Drawing.Size(121, 21);
             this.cbAuthor.TabIndex = 8;
@@ -132,10 +133,11 @@
             // urlDateTime
             // 
             this.urlDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.urlDateTime.Location = new System.Drawing.Point(347, 90);
+            this.urlDateTime.Location = new System.Drawing.Point(285, 90);
             this.urlDateTime.Name = "urlDateTime";
             this.urlDateTime.Size = new System.Drawing.Size(120, 20);
             this.urlDateTime.TabIndex = 9;
+            this.urlDateTime.ValueChanged += new System.EventHandler(this.urlDateTime_ValueChanged);
             // 
             // label6
             // 
@@ -166,6 +168,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkPublic);
             this.groupBox1.Controls.Add(this.btnAddAuthor);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.txtType);
@@ -189,12 +192,24 @@
             // 
             // btnAddAuthor
             // 
-            this.btnAddAuthor.Location = new System.Drawing.Point(473, 52);
+            this.btnAddAuthor.Location = new System.Drawing.Point(411, 52);
             this.btnAddAuthor.Name = "btnAddAuthor";
             this.btnAddAuthor.Size = new System.Drawing.Size(19, 23);
             this.btnAddAuthor.TabIndex = 13;
             this.btnAddAuthor.Text = "+";
             this.btnAddAuthor.UseVisualStyleBackColor = true;
+            // 
+            // checkPublic
+            // 
+            this.checkPublic.AutoSize = true;
+            this.checkPublic.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkPublic.Location = new System.Drawing.Point(429, 93);
+            this.checkPublic.Name = "checkPublic";
+            this.checkPublic.Size = new System.Drawing.Size(67, 17);
+            this.checkPublic.TabIndex = 14;
+            this.checkPublic.Text = "PUBLIC:";
+            this.checkPublic.UseVisualStyleBackColor = true;
+            this.checkPublic.CheckedChanged += new System.EventHandler(this.checkPublic_CheckedChanged);
             // 
             // UrlInfo
             // 
@@ -226,5 +241,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAddAuthor;
+        private System.Windows.Forms.CheckBox checkPublic;
     }
 }
