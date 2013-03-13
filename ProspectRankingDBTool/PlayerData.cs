@@ -5,7 +5,9 @@ using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.IO;
 
 namespace ProspectRankingDBTool
 {
@@ -221,6 +223,63 @@ namespace ProspectRankingDBTool
             else
             {
                 m_player.Public = "N";
+            }
+        }
+
+        private void numHeight_Enter(object sender, EventArgs e)
+        {
+            numHeight.Select(0, numHeight.Text.Length);
+        }
+
+        private void numWeight_Enter(object sender, EventArgs e)
+        {
+            numWeight.Select(0, numWeight.Text.Length);
+        }
+
+        private void btnFindUrls_Click(object sender, EventArgs e)
+        {
+            // open web browser on player's baseball reference page
+            if (m_player.BasebaRef == null || m_player.BasebaRef.Length == 0)
+            {
+                string baseballReferenceSearchUrl = "http://www.baseball-reference.com/pl/player_search.cgi?search=" + m_player.Firstname + "+" + m_player.Lastname;
+                System.Diagnostics.Process.Start(baseballReferenceSearchUrl);
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(m_player.BasebaRef);
+            }
+        }
+
+        private void btnParseFG_Click(object sender, EventArgs e)
+        {
+            if (m_player.Fangraphs != null)
+            {
+                HtmlAgilityPack.HtmlWeb hw = new HtmlAgilityPack.HtmlWeb();
+                HtmlAgilityPack.HtmlDocument doc = hw.Load(m_player.Fangraphs);
+
+                HtmlAgilityPack.HtmlNodeCollection divs = doc.DocumentNode.SelectNodes("//div[@id='content']");
+
+                if (divs != null)
+                {
+                    HtmlConvert htt = new HtmlConvert();
+
+                    StringWriter sw = new StringWriter();
+                    htt.ConvertTo(divs.First(), sw);
+                    sw.Flush();
+
+                    string s = sw.ToString();
+
+                    Regex re = new Regex(@"(^.+\w)\s+Birthdate:\s+(\S+)\s+Bats/Throws:\s+(\S+)\s+Height/Weight:\s+(\S+)\s+Position:\s+(\S+)Contract:", RegexOptions.Compiled);
+
+                    GroupCollection groups = re.Match(s).Groups;
+                    foreach (Group grp in groups)
+                    {
+                        foreach (Capture cap in grp.Captures)
+                        {
+                            string temp = cap.Value;
+                        }
+                    }
+                }
             }
         }
     }

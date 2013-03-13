@@ -151,9 +151,9 @@ namespace ProspectRankingDBTool
                 m_playerRankingsList.Add(player);
             }
 
-            playerRank1.PlayerRankValue = m_playerRankingsList[0];
             playerRank1.PlayerListRef = m_playerList;
             playerRank1.UrlRef = m_url;
+            playerRank1.PlayerRankValue = m_playerRankingsList[0];
 
             btnSave.Enabled = false;
         }
@@ -169,6 +169,11 @@ namespace ProspectRankingDBTool
                 return;
 
             m_context.DBContext.SaveChanges();
+        }
+
+        private void numRankings_Enter(object sender, EventArgs e)
+        {
+            numRankings.Select(0, numRankings.Text.Length);
         }
     }
 }

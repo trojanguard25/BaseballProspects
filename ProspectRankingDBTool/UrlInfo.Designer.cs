@@ -42,8 +42,8 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAddAuthor = new System.Windows.Forms.Button();
             this.checkPublic = new System.Windows.Forms.CheckBox();
+            this.btnAddAuthor = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,6 +123,7 @@
             // 
             // cbAuthor
             // 
+            this.cbAuthor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAuthor.FormattingEnabled = true;
             this.cbAuthor.Location = new System.Drawing.Point(284, 54);
             this.cbAuthor.Name = "cbAuthor";
@@ -190,15 +191,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "URL Information";
             // 
-            // btnAddAuthor
-            // 
-            this.btnAddAuthor.Location = new System.Drawing.Point(411, 52);
-            this.btnAddAuthor.Name = "btnAddAuthor";
-            this.btnAddAuthor.Size = new System.Drawing.Size(19, 23);
-            this.btnAddAuthor.TabIndex = 13;
-            this.btnAddAuthor.Text = "+";
-            this.btnAddAuthor.UseVisualStyleBackColor = true;
-            // 
             // checkPublic
             // 
             this.checkPublic.AutoSize = true;
@@ -210,6 +202,16 @@
             this.checkPublic.Text = "PUBLIC:";
             this.checkPublic.UseVisualStyleBackColor = true;
             this.checkPublic.CheckedChanged += new System.EventHandler(this.checkPublic_CheckedChanged);
+            // 
+            // btnAddAuthor
+            // 
+            this.btnAddAuthor.Enabled = false;
+            this.btnAddAuthor.Location = new System.Drawing.Point(411, 52);
+            this.btnAddAuthor.Name = "btnAddAuthor";
+            this.btnAddAuthor.Size = new System.Drawing.Size(19, 23);
+            this.btnAddAuthor.TabIndex = 13;
+            this.btnAddAuthor.Text = "+";
+            this.btnAddAuthor.UseVisualStyleBackColor = true;
             // 
             // UrlInfo
             // 

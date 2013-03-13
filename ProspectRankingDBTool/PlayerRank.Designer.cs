@@ -95,6 +95,7 @@
             // 
             // cbPlayerName
             // 
+            this.cbPlayerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlayerName.FormattingEnabled = true;
             this.cbPlayerName.Location = new System.Drawing.Point(105, 8);
             this.cbPlayerName.Name = "cbPlayerName";
@@ -114,6 +115,7 @@
             // 
             // cbOrganization
             // 
+            this.cbOrganization.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOrganization.FormattingEnabled = true;
             this.cbOrganization.Location = new System.Drawing.Point(105, 41);
             this.cbOrganization.Name = "cbOrganization";
@@ -123,6 +125,7 @@
             // 
             // cbGrade
             // 
+            this.cbGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGrade.FormattingEnabled = true;
             this.cbGrade.Location = new System.Drawing.Point(105, 110);
             this.cbGrade.Name = "cbGrade";

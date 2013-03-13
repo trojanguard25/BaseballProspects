@@ -55,6 +55,8 @@
             this.checkPublic = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txtPlayerID = new System.Windows.Forms.TextBox();
+            this.btnFindUrls = new System.Windows.Forms.Button();
+            this.btnParseFG = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numGradYear)).BeginInit();
@@ -218,6 +220,7 @@
             this.numHeight.Size = new System.Drawing.Size(120, 20);
             this.numHeight.TabIndex = 15;
             this.numHeight.ValueChanged += new System.EventHandler(this.numHeight_ValueChanged);
+            this.numHeight.Enter += new System.EventHandler(this.numHeight_Enter);
             // 
             // numWeight
             // 
@@ -231,9 +234,11 @@
             this.numWeight.Size = new System.Drawing.Size(120, 20);
             this.numWeight.TabIndex = 16;
             this.numWeight.ValueChanged += new System.EventHandler(this.numWeight_ValueChanged);
+            this.numWeight.Enter += new System.EventHandler(this.numWeight_Enter);
             // 
             // cbOrganization
             // 
+            this.cbOrganization.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOrganization.FormattingEnabled = true;
             this.cbOrganization.Location = new System.Drawing.Point(321, -1);
             this.cbOrganization.Name = "cbOrganization";
@@ -243,6 +248,7 @@
             // 
             // cbPosition
             // 
+            this.cbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPosition.FormattingEnabled = true;
             this.cbPosition.Location = new System.Drawing.Point(321, 25);
             this.cbPosition.Name = "cbPosition";
@@ -252,6 +258,7 @@
             // 
             // cbThrow
             // 
+            this.cbThrow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbThrow.FormattingEnabled = true;
             this.cbThrow.Location = new System.Drawing.Point(321, 52);
             this.cbThrow.Name = "cbThrow";
@@ -261,6 +268,7 @@
             // 
             // cbBat
             // 
+            this.cbBat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBat.FormattingEnabled = true;
             this.cbBat.Location = new System.Drawing.Point(321, 78);
             this.cbBat.Name = "cbBat";
@@ -328,10 +336,32 @@
             this.txtPlayerID.Size = new System.Drawing.Size(62, 20);
             this.txtPlayerID.TabIndex = 26;
             // 
+            // btnFindUrls
+            // 
+            this.btnFindUrls.Location = new System.Drawing.Point(105, 178);
+            this.btnFindUrls.Name = "btnFindUrls";
+            this.btnFindUrls.Size = new System.Drawing.Size(75, 23);
+            this.btnFindUrls.TabIndex = 27;
+            this.btnFindUrls.Text = "Find BR";
+            this.btnFindUrls.UseVisualStyleBackColor = true;
+            this.btnFindUrls.Click += new System.EventHandler(this.btnFindUrls_Click);
+            // 
+            // btnParseFG
+            // 
+            this.btnParseFG.Location = new System.Drawing.Point(186, 178);
+            this.btnParseFG.Name = "btnParseFG";
+            this.btnParseFG.Size = new System.Drawing.Size(75, 23);
+            this.btnParseFG.TabIndex = 28;
+            this.btnParseFG.Text = "Parse FG";
+            this.btnParseFG.UseVisualStyleBackColor = true;
+            this.btnParseFG.Click += new System.EventHandler(this.btnParseFG_Click);
+            // 
             // PlayerData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnParseFG);
+            this.Controls.Add(this.btnFindUrls);
             this.Controls.Add(this.txtPlayerID);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.checkPublic);
@@ -399,5 +429,7 @@
         private System.Windows.Forms.CheckBox checkPublic;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtPlayerID;
+        private System.Windows.Forms.Button btnFindUrls;
+        private System.Windows.Forms.Button btnParseFG;
     }
 }

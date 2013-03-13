@@ -19,7 +19,20 @@ namespace ProspectRankingDBTool
         private void btnSave_Click(object sender, EventArgs e)
         {
             BaseballModelContext.Instance.DBContext.Players.AddObject(playerData1.PlayerEntity);
-            BaseballModelContext.Instance.DBContext.SaveChanges();
+            try
+            {
+                BaseballModelContext.Instance.DBContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                string errorMsg = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    errorMsg += " " + ex.InnerException.Message;
+                }
+                MessageBox.Show("Unable to save. Please update the form: " + errorMsg);
+                this.DialogResult = System.Windows.Forms.DialogResult.None;
+            }
         }
     }
 }

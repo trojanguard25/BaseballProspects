@@ -35,7 +35,7 @@ namespace ProspectRankingDBTool
 
         private PlayerRanking m_playerRanking;
         private BaseballModelContext m_context;
-        private List<PlayerInfo> m_players;
+        private BindingList<PlayerInfo> m_players;
         private List<string> m_organizationEnum;
         private List<string> m_gradesEnum;
         private PlayerList m_playerList;
@@ -62,6 +62,7 @@ namespace ProspectRankingDBTool
             set
             {
                 m_playerList = value;
+                UpdatePlayerList();
             }
         }
 
@@ -85,18 +86,23 @@ namespace ProspectRankingDBTool
 
                 if (m_playerRanking != null)
                 {
-                    int selectedIndex = m_organizationEnum.IndexOf(m_playerRanking.OrganizationID);
-                    if (selectedIndex >= 0)
-                    {
-                        cbOrganization.SelectedIndex = selectedIndex;
-                    }
-                    else if (m_playerList != null)
+                    int selectedIndex = 0;
+
+                    if (m_playerList != null)
                     {
                         selectedIndex = m_organizationEnum.IndexOf(m_playerList.Organization);
                         if (selectedIndex >= 0)
                         {
                             cbOrganization.SelectedIndex = selectedIndex;
                             m_playerRanking.OrganizationID = m_playerList.Organization;
+                        }
+                    }
+                    else
+                    {
+                        selectedIndex = m_organizationEnum.IndexOf(m_playerRanking.OrganizationID);
+                        if (selectedIndex >= 0)
+                        {
+                            cbOrganization.SelectedIndex = selectedIndex;
                         }
                     }
 
@@ -130,7 +136,7 @@ namespace ProspectRankingDBTool
         {
             if (m_players == null)
             {
-                m_players = new List<PlayerInfo>();
+                m_players = new BindingList<PlayerInfo>();
             }
             else
             {
@@ -179,12 +185,19 @@ namespace ProspectRankingDBTool
         {
             m_playerRanking.PlayerList = m_playerList;
             m_playerRanking.URL = m_url;
-            m_context.DBContext.SaveChanges();
+            try
+            {
+                m_context.DBContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Save Changes Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cbPlayerName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (m_playerRanking != null)
+            if (m_playerRanking != null && cbPlayerName.SelectedIndex >= 0)
             {
                 m_playerRanking.Player = m_players.ElementAt(cbPlayerName.SelectedIndex).GetPlayer();
             }

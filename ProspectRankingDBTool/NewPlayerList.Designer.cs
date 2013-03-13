@@ -170,6 +170,7 @@
             0,
             0});
             this.numRankings.ValueChanged += new System.EventHandler(this.numRankings_ValueChanged);
+            this.numRankings.Enter += new System.EventHandler(this.numRankings_Enter);
             // 
             // label4
             // 
@@ -183,6 +184,7 @@
             // 
             // cbPosition
             // 
+            this.cbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPosition.FormattingEnabled = true;
             this.cbPosition.Location = new System.Drawing.Point(104, 117);
             this.cbPosition.Name = "cbPosition";
@@ -202,6 +204,7 @@
             // 
             // cbOrganization
             // 
+            this.cbOrganization.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOrganization.FormattingEnabled = true;
             this.cbOrganization.Location = new System.Drawing.Point(104, 76);
             this.cbOrganization.Name = "cbOrganization";
@@ -292,6 +295,7 @@
             this.urlInfo1.Name = "urlInfo1";
             this.urlInfo1.Size = new System.Drawing.Size(705, 133);
             this.urlInfo1.TabIndex = 0;
+            this.urlInfo1.URLObject = null;
             // 
             // NewPlayerList
             // 
