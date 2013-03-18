@@ -240,7 +240,7 @@
             // 
             this.cbOrganization.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOrganization.FormattingEnabled = true;
-            this.cbOrganization.Location = new System.Drawing.Point(321, -1);
+            this.cbOrganization.Location = new System.Drawing.Point(321, 0);
             this.cbOrganization.Name = "cbOrganization";
             this.cbOrganization.Size = new System.Drawing.Size(62, 21);
             this.cbOrganization.TabIndex = 17;

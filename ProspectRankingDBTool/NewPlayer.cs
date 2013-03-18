@@ -16,6 +16,17 @@ namespace ProspectRankingDBTool
             InitializeComponent();
         }
 
+        public NewPlayer(string fgUrl, string organization)
+        {
+            InitializeComponent();
+
+            playerData1.UpdateFGUrl(fgUrl);
+            if (organization != null)
+            {
+                playerData1.PlayerEntity.Organization = organization;
+            }
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             BaseballModelContext.Instance.DBContext.Players.AddObject(playerData1.PlayerEntity);

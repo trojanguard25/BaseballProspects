@@ -32,5 +32,51 @@ namespace ProspectRankingDBTool
             {
             }
         }
+
+        private void btnParseFGtop15_Click(object sender, EventArgs e)
+        {
+            string org = null;
+            if (txtFGUrl.TextLength > 0)
+            {
+                HtmlAgilityPack.HtmlWeb hw = new HtmlAgilityPack.HtmlWeb();
+                HtmlAgilityPack.HtmlDocument doc = hw.Load(txtFGUrl.Text);
+
+                HtmlAgilityPack.HtmlNode titleNode = doc.DocumentNode.SelectSingleNode("html/head/title");
+                if (titleNode != null)
+                {
+                    string title = titleNode.InnerText;
+
+                    org = BaseballModelContext.ParseForOrganization(title);
+                }
+
+                HtmlAgilityPack.HtmlNodeCollection divs = doc.DocumentNode.SelectNodes("//div[@id='blogcontent']");
+
+                if (divs != null)
+                {
+                    HtmlAgilityPack.HtmlNode node = divs[0];
+
+                    HtmlAgilityPack.HtmlNodeCollection links = node.SelectNodes("//a[@href]");
+                    if (links != null)
+                    {
+                        foreach (HtmlAgilityPack.HtmlNode link in links)
+                        {
+                            HtmlAgilityPack.HtmlAttribute att = link.Attributes["href"];
+                            if (att != null)
+                            {
+                                if (att.Value.StartsWith("http://www.fangraphs.com/statss.aspx?playerid=", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string myUrl = att.Value;
+                                    NewPlayer form = new NewPlayer(myUrl, org);
+                                    if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                                    {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                txtFGUrl.Text = "";
+            }
+        }
     }
 }

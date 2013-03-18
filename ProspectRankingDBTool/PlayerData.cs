@@ -73,15 +73,21 @@ namespace ProspectRankingDBTool
             m_organizationEnum = new List<string>(m_context.Organizations);
             m_organizationEnum.Insert(0, "");
 
+            // need to store the values for combo-boxes or else they will be overridden when the DataSource is set
+            string bat = m_player.Bat;
+            string pos = m_player.Position;
+            string thr = m_player.Throw;
+            string org = m_player.Organization;
+
             cbBat.DataSource = m_batEnum;
             cbPosition.DataSource = m_positionEnum;
             cbThrow.DataSource = m_throwEnum;
             cbOrganization.DataSource = m_organizationEnum;
 
-            SetCBIndex(m_player.Bat, m_batEnum, cbBat);
-            SetCBIndex(m_player.Position, m_positionEnum, cbPosition);
-            SetCBIndex(m_player.Throw, m_throwEnum, cbThrow);
-            SetCBIndex(m_player.Organization, m_organizationEnum, cbOrganization);
+            SetCBIndex(bat, m_batEnum, cbBat);
+            SetCBIndex(pos, m_positionEnum, cbPosition);
+            SetCBIndex(thr, m_throwEnum, cbThrow);
+            SetCBIndex(org, m_organizationEnum, cbOrganization);
 
             checkPublic.Checked = m_player.Public.Equals("Y", StringComparison.OrdinalIgnoreCase);
 
@@ -96,7 +102,7 @@ namespace ProspectRankingDBTool
 
         private void SetCBIndex(string currentValue, List<string> dataList, ComboBox cb)
         {
-            if (currentValue.Length > 0)
+            if (currentValue != null && currentValue.Length > 0)
             {
                 int posID = dataList.FindIndex(s => s == currentValue);
                 if (posID < 0)
@@ -269,18 +275,79 @@ namespace ProspectRankingDBTool
 
                     string s = sw.ToString();
 
-                    Regex re = new Regex(@"(^.+\w)\s+Birthdate:\s+(\S+)\s+Bats/Throws:\s+(\S+)\s+Height/Weight:\s+(\S+)\s+Position:\s+(\S+)Contract:", RegexOptions.Compiled);
+                    Regex re = new Regex(@"(^.+\w)\s*Birthdate:\s+(\S+)\s+Bats/Throws:\s+(\S+)\s+Height/Weight:\s+(\S+)\s+Position:\s+(\S+)Contract:", RegexOptions.Compiled);
 
                     GroupCollection groups = re.Match(s).Groups;
-                    foreach (Group grp in groups)
+                    if (groups.Count == 6)
                     {
-                        foreach (Capture cap in grp.Captures)
+                        // get name
+                        string name = groups[1].Captures[0].Value;
+                        Regex reName = new Regex(@"(^\w+)\s+(\S+)$", RegexOptions.Compiled);
+                        GroupCollection nameGroups = reName.Match(name).Groups;
+                        if (nameGroups.Count == 3)
                         {
-                            string temp = cap.Value;
+                            string firstName = nameGroups[1].Captures[0].Value;
+                            string lastName = nameGroups[2].Captures[0].Value;
+                            txtFirstName.Text = firstName;
+                            txtLastName.Text = lastName;
+                        }
+
+                        // get birthdate
+                        string birthdate = groups[2].Captures[0].Value;
+                        DateTimeConverter date = new DateTimeConverter();
+                        DateTime birthDataTime = (DateTime)date.ConvertFromString(birthdate);
+                        dateDOB.Value = birthDataTime;
+
+                        // get batting and throwing
+                        string batsThrows = groups[3].Captures[0].Value;
+                        Regex reBT = new Regex(@"(\w)/(\w)", RegexOptions.Compiled);
+                        GroupCollection btGroups = reBT.Match(batsThrows).Groups;
+                        if (btGroups.Count == 3)
+                        {
+                            string bats = btGroups[1].Captures[0].Value;
+                            string throws = btGroups[2].Captures[0].Value;
+                            SetCBIndex(bats, m_batEnum, cbBat);
+                            SetCBIndex(throws, m_throwEnum, cbThrow);
+                        }
+
+                        // get height and weight
+                        string heightWeight = groups[4].Captures[0].Value;
+                        Regex reHW = new Regex(@"(\w+)-(\w+)/(\w+)", RegexOptions.Compiled);
+                        GroupCollection hwGroups = reHW.Match(heightWeight).Groups;
+                        if (hwGroups.Count == 4)
+                        {
+                            int heightFt = Convert.ToInt32(hwGroups[1].Captures[0].Value);
+                            int heightInch = Convert.ToInt32(hwGroups[2].Captures[0].Value);
+                            int weight = Convert.ToInt32(hwGroups[3].Captures[0].Value);
+
+                            numHeight.Value = heightFt * 12 + heightInch;
+                            numWeight.Value = weight;
+                        }
+
+                        // get position
+                        string position = groups[5].Captures[0].Value;
+                        Regex rePos = new Regex(@"(\w+)/");
+                        GroupCollection posGroups = rePos.Match(position).Groups;
+                        if (posGroups.Count > 1)
+                        {
+                            SetCBIndex(posGroups[1].Captures[0].Value, m_positionEnum, cbPosition);
+                        }
+                        else
+                        {
+                            if (position == "P")
+                            {
+                                position = "SP";
+                            }
+                            SetCBIndex(position, m_positionEnum, cbPosition);
                         }
                     }
                 }
             }
+        }
+
+        public void UpdateFGUrl(string url)
+        {
+            txtFGUrl.Text = url;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ProspectRankingDBTool
 {
@@ -137,6 +138,164 @@ namespace ProspectRankingDBTool
             {
                 return m_publicEnum;
             }
+        }
+
+        public static string ParseForOrganization(string text)
+        {
+            Regex re = new Regex("yankees", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "NYY";
+            }
+            
+            re = new Regex("blue jays", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "TOR";
+            }
+            re = new Regex("rays", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "TB";
+            }
+            re = new Regex("orioles", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "BAL";
+            }
+            re = new Regex("red sox", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "BOX";
+            }
+            re = new Regex("tigers", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "DET";
+            }
+            re = new Regex("indians", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "CLE";
+            }
+            re = new Regex("royals", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "KC";
+            }
+            re = new Regex("twins", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "MIN";
+            }
+            re = new Regex("white sox", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "CWS";
+            }
+            re = new Regex("angels", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "LAA";
+            }
+            re = new Regex("rangers", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "TEX";
+            }
+            re = new Regex("astros", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "HOU";
+            }
+            re = new Regex("mariners", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "SEA";
+            }
+            re = new Regex("athletics", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "OAK";
+            }
+            re = new Regex("mets", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "NYM";
+            }
+            re = new Regex("phillies", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "PHI";
+            }
+            re = new Regex("nationals", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "WAS";
+            }
+            re = new Regex("braves", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "ATL";
+            }
+            re = new Regex("marlins", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "MIA";
+            }
+            re = new Regex("cardinals", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "STL";
+            }
+            re = new Regex("reds", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "CIN";
+            }
+            re = new Regex("brewers", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "MIL";
+            }
+            re = new Regex("pirates", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "PIT";
+            }
+            re = new Regex("cubs", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "CHC";
+            }
+            re = new Regex("dodgers", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "LAD";
+            }
+            re = new Regex("padres", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "SD";
+            }
+            re = new Regex("giants", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "SF";
+            }
+            re = new Regex("rockies", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "COL";
+            }
+            re = new Regex("diamondbacks", RegexOptions.IgnoreCase);
+            if (re.IsMatch(text))
+            {
+                return "ARZ";
+            }
+
+
+            return null;
         }
     }
 }
