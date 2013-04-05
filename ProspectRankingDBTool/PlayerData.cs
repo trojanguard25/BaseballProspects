@@ -306,7 +306,16 @@ namespace ProspectRankingDBTool
                         {
                             string bats = btGroups[1].Captures[0].Value;
                             string throws = btGroups[2].Captures[0].Value;
+
+                            if (bats == "B")
+                            {
+                                bats = "S";
+                            }
                             SetCBIndex(bats, m_batEnum, cbBat);
+                            if (throws != "L" && throws != "R")
+                            {
+                                throws = "L";
+                            }
                             SetCBIndex(throws, m_throwEnum, cbThrow);
                         }
 

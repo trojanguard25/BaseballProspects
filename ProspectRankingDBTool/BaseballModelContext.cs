@@ -166,7 +166,7 @@ namespace ProspectRankingDBTool
             re = new Regex("red sox", RegexOptions.IgnoreCase);
             if (re.IsMatch(text))
             {
-                return "BOX";
+                return "BOS";
             }
             re = new Regex("tigers", RegexOptions.IgnoreCase);
             if (re.IsMatch(text))
