@@ -22,6 +22,8 @@ namespace ProspectRankingDBTool
         private List<string> m_batEnum;
         private List<string> m_organizationEnum;
 
+        private bool m_parseFGOnInitialization = false;
+
         public PlayerData()
         {
             InitializeComponent();
@@ -89,7 +91,10 @@ namespace ProspectRankingDBTool
             SetCBIndex(thr, m_throwEnum, cbThrow);
             SetCBIndex(org, m_organizationEnum, cbOrganization);
 
-            checkPublic.Checked = m_player.Public.Equals("Y", StringComparison.OrdinalIgnoreCase);
+            if (m_player.Public != null)
+            {
+                checkPublic.Checked = m_player.Public.Equals("Y", StringComparison.OrdinalIgnoreCase);
+            }
 
             if (m_player.GraduationYear != null)
             {
@@ -98,6 +103,13 @@ namespace ProspectRankingDBTool
 
             txtBRUrl.Text = m_player.BasebaRef;
             txtFGUrl.Text = m_player.Fangraphs;
+
+            if (m_parseFGOnInitialization)
+            {
+                ParseFG();
+                FindBRUrls();
+                checkPublic.Checked = true;
+            }
         }
 
         private void SetCBIndex(string currentValue, List<string> dataList, ComboBox cb)
@@ -244,6 +256,11 @@ namespace ProspectRankingDBTool
 
         private void btnFindUrls_Click(object sender, EventArgs e)
         {
+            FindBRUrls();
+        }
+
+        public void FindBRUrls()
+        {
             // open web browser on player's baseball reference page
             if (m_player.BasebaRef == null || m_player.BasebaRef.Length == 0)
             {
@@ -257,6 +274,11 @@ namespace ProspectRankingDBTool
         }
 
         private void btnParseFG_Click(object sender, EventArgs e)
+        {
+            ParseFG();
+        }
+
+        public void ParseFG()
         {
             if (m_player.Fangraphs != null)
             {
@@ -357,6 +379,7 @@ namespace ProspectRankingDBTool
         public void UpdateFGUrl(string url)
         {
             txtFGUrl.Text = url;
+            m_parseFGOnInitialization = true;
         }
     }
 }
